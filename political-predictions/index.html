@@ -67,7 +67,7 @@
               <th>#</th>
               <th>Prediction</th>
               <th class="sortable datecol" data-type="date">Date made <span class="arrow">⇅</span></th>
-              <th class="sortable datecol" data-type="text">Deadline<span class="arrow">⇅</span></th>
+              <th id="col-deadline" class="sortable datecol" data-type="date">Deadline <span class="arrow">⇅</span></th>
               <th class="sortable" data-type="text">Status <span class="arrow">⇅</span></th>
               <th>Notes</th>
             </tr>
@@ -85,7 +85,7 @@
               <td class="rownum" data-label="#"><span class="n"></span></td>
               <td data-label="Prediction">“Remigration” as a concept will enter mainstream political discourse (media + politicians) in Western Europe and might become policy in some countries</td>
               <td class="datecol" data-label="Date made">2025-08-31</td>
-              <td class="datecol" data-label="Deadline">By end 2027</td>
+              <td class="datecol" data-label="Deadline">2027-12-31</td>
               <td data-label="Status">Pending</td>
               <td data-label="Notes">Currently a fringe term → likely to appear in mainstream debates/editorials by 2026–27. Especially plausible in NL, DE, SE, or FR manifestos.</td>
             </tr>
@@ -93,7 +93,7 @@
               <td class="rownum" data-label="#"><span class="n"></span></td>
               <td data-label="Prediction">One of the following countries will see a landslide right-wing (cultural/conservative) win. So focused on immmigration and not taxes necessarily: UK, Sweden, Germany, Netherlands, or France </td>
               <td class="datecol" data-label="Date made">2025-08-31</td>
-              <td class="datecol" data-label="Deadline">By end 2029</td>
+              <td class="datecol" data-label="Deadline">2029-12-31</td>
               <td data-label="Status">Pending</td>
               <td data-label="Notes">Candidates: Le Pen in France 2027, PVV in NL 2025, AfD breakthroughs.</td>
             </tr>
@@ -126,7 +126,7 @@
               <td class="rownum" data-label="#"><span class="n"></span></td>
               <td data-label="Prediction">Some issue related to grooming gangs or immigration/boat refugees in the UK will blow up and cause → major riots/media storm.</td>
               <td class="datecol" data-label="Date made">2025-08-31</td>
-              <td class="datecol" data-label="Deadline">By mid-2026</td>
+              <td class="datecol" data-label="Deadline">2026-07-01</td>
               <td data-label="Status">Pending</td>
               <td data-label="Notes">Pattern of escalating protests suggests another eruption.</td>
             </tr>
@@ -134,7 +134,7 @@
               <td class="rownum" data-label="#"><span class="n"></span></td>
               <td data-label="Prediction">“Free speech crackdowns (jailing for posts, policing protests) will become a top-3 political issue in the UK by 2027, fuelling Reform’s or an even firmer alternative's rise”</td>
               <td class="datecol" data-label="Date made">2025-08-31</td>
-              <td class="datecol" data-label="Deadline">By 2027</td>
+              <td class="datecol" data-label="Deadline">2027-06-01</td>
               <td data-label="Status">Pending</td>
               <td data-label="Notes">They can&#39;t course correct and will keep jailing people for speech which will increase the problem</td>
             </tr>
@@ -144,8 +144,6 @@
           </tfoot>
         </table>
       </div>
-
-      <p class="note">To add new predictions with different “Date made” values, append rows here or update the source sheet and regenerate this table later.</p>
     </div>
 
     <script>
@@ -153,35 +151,62 @@
         const table = document.getElementById('predictions');
         if(!table) return;
         const getCellText = (row, idx) => (row.children[idx]?.textContent || '').trim();
+        const parseDateLoose = (v) => {
+          if(!v) return Number.POSITIVE_INFINITY;
+          const s = v.trim();
+          const iso = s.match(/^(\d{4})-(\d{2})-(\d{2})$/);
+          if(iso){
+            const t = Date.parse(s);
+            return isNaN(t) ? Number.POSITIVE_INFINITY : t;
+          }
+          const parsed = Date.parse(s);
+          if(!Number.isNaN(parsed)) return parsed;
+          const yearMatch = s.match(/(19|20)\d{2}/);
+          if(yearMatch){
+            const y = parseInt(yearMatch[0],10);
+            let m = 11, d = 31; // default end of year
+            if(/early|begin|start/i.test(s)){ m = 2; d = 31; } // ~Q1 end
+            else if(/mid/i.test(s)){ m = 5; d = 30; } // ~mid-year
+            else if(/late|end/i.test(s)){ m = 11; d = 31; }
+            try{ return new Date(y, m, d).getTime(); }catch(e){ return Number.POSITIVE_INFINITY; }
+          }
+          return Number.POSITIVE_INFINITY;
+        };
         const parseVal = (type, v) => {
           if(type==='number') return parseFloat(v.replace(/[^0-9.-]/g,'')) || 0;
-          if(type==='date') {
-            // Expect YYYY-MM-DD; fall back to Date.parse
-            const m = v.match(/^(\d{4})-(\d{2})-(\d{2})$/);
-            if(m){ return new Date(v).getTime() || 0; }
-            const t = Date.parse(v); return isNaN(t)? 0 : t;
-          }
-          return v.toLowerCase();
+          if(type==='date') return parseDateLoose(v);
+          return (v||'').toLowerCase();
         };
         const setDirIndicator = (th, dir) => {
           table.querySelectorAll('th').forEach(h=>h.dataset.sorted='');
           th.dataset.sorted = dir;
         };
-        table.querySelectorAll('thead th.sortable').forEach((th, colIdx)=>{
+        const headers = Array.from(table.tHead.rows[0].cells);
+        const doSort = (th, colIdx, dir) => {
+          const type = th.dataset.type || 'text';
+          const rows = Array.from(table.tBodies[0].rows);
+          rows.sort((a,b)=>{
+            const va = parseVal(type, getCellText(a,colIdx));
+            const vb = parseVal(type, getCellText(b,colIdx));
+            if(va<vb) return -1*dir; if(va>vb) return 1*dir; return 0;
+          });
+          setDirIndicator(th, dir===1 ? 'asc' : 'desc');
+          rows.forEach(r=>table.tBodies[0].appendChild(r));
+        };
+        headers.forEach((th, colIdx)=>{
+          if(!th.classList.contains('sortable')) return;
           let dir = 1; // 1 asc, -1 desc
           th.addEventListener('click', ()=>{
-            const type = th.dataset.type || 'text';
-            const rows = Array.from(table.tBodies[0].rows);
-            const sorted = rows.sort((a,b)=>{
-              const va = parseVal(type, getCellText(a,colIdx));
-              const vb = parseVal(type, getCellText(b,colIdx));
-              if(va<vb) return -1*dir; if(va>vb) return 1*dir; return 0;
-            });
-            dir *= -1; // toggle
-            setDirIndicator(th, dir===1 ? 'asc' : 'desc');
-            sorted.forEach(r=>table.tBodies[0].appendChild(r));
+            doSort(th, colIdx, dir);
+            dir *= -1; // toggle for next click
           });
         });
+        // Default: sort by Deadline ascending (earliest first)
+        const deadlineTh = document.getElementById('col-deadline');
+        if(deadlineTh){
+          const colIdx = headers.indexOf(deadlineTh);
+          if(colIdx >= 0) doSort(deadlineTh, colIdx, 1);
+        }
       })();
     </script>
   </body>
