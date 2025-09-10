@@ -37,13 +37,15 @@
       }
       /* Mobile-friendly stacked card view */
       @media (max-width: 700px){
-        .table-wrap{ border:0; }
-        table, thead, tfoot{ display:block; }
+        html, body{ width:100%; overflow-x:hidden; }
+        .wrap{ padding-left:.75rem; padding-right:.75rem; }
+        .table-wrap{ border:0; overflow-x:hidden; }
+        table, thead, tfoot{ display:block; width:100%; }
         thead{ position:absolute; left:-9999px; }
-        tbody{ display:grid; gap:.75rem; }
-        tbody tr{ display:grid; border:1px solid color-mix(in oklab, CanvasText 15%, transparent); border-radius:12px; padding:.5rem .5rem; background: color-mix(in oklab, Canvas 98%, CanvasText 2%); }
-        tbody td{ display:grid; grid-template-columns: 10ch 1fr; gap:.5rem; border:none; padding:.25rem .3rem; }
-        tbody td::before{ content: attr(data-label); font-weight:600; opacity:.8; }
+        tbody{ display:grid; gap:.75rem; margin:0; width:100%; }
+        tbody tr{ display:grid; width:100%; box-sizing:border-box; border:1px solid color-mix(in oklab, CanvasText 15%, transparent); border-radius:12px; padding:.5rem .6rem; background: color-mix(in oklab, Canvas 98%, CanvasText 2%); }
+        tbody td{ display:grid; grid-template-columns: minmax(7.5em, 38%) 1fr; gap:.5rem; border:none; padding:.25rem 0; min-width:0; overflow-wrap:anywhere; word-break: break-word; }
+        tbody td::before{ content: attr(data-label); font-weight:600; opacity:.8; align-self:start; }
       }
     </style>
   </head>
