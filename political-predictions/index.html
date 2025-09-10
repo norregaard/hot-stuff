@@ -10,8 +10,8 @@
       *{ box-sizing:border-box }
       body{ margin:0; font-family: system-ui, -apple-system, Segoe UI, Roboto, sans-serif; line-height:1.55; }
       .wrap{ max-width: 1100px; margin: 0 auto; padding: 1.25rem 1rem 3rem; }
-      header{ display:flex; align-items:center; justify-content:space-between; gap:1rem; flex-wrap:wrap; }
-      h1{ margin:.25rem 0; font-size: clamp(1.6rem, 3.5vw, 2.1rem); }
+      header{ display:flex; align-items:center; gap:1rem; flex-wrap:wrap; }
+      h1{ margin:.25rem 0; font-size: clamp(1.6rem, 3.5vw, 2.1rem); text-align:center; flex: 1 1 100%; }
       .back{ text-decoration:none; display:inline-flex; align-items:center; gap:.4rem; padding:.45rem .7rem; border-radius:10px; border:1px solid color-mix(in oklab, CanvasText 20%, transparent); }
       .back:hover{ background: color-mix(in oklab, Canvas 94%, CanvasText 4%); }
       .meta{ opacity:.85; font-size:.95rem; margin:.25rem 0 1rem; }
@@ -25,6 +25,26 @@
       tfoot td{ padding:.65rem .6rem; }
       .note{ opacity:.8; font-size:.9rem; }
       code{ font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; }
+      /* Dates look cleaner with tabular numerals and no wrapping */
+      th.datecol, td.datecol{ white-space: nowrap; font-variant-numeric: tabular-nums; }
+      /* Reasonable min widths for key columns on larger screens */
+      @media (min-width: 800px){
+        th:nth-child(1), td:nth-child(1){ width: 4ch; }
+        th:nth-child(2), td:nth-child(2){ min-width: 28ch; }
+        th:nth-child(3), td:nth-child(3){ width: 12ch; }
+        th:nth-child(4), td:nth-child(4){ width: 14ch; }
+        th:nth-child(5), td:nth-child(5){ width: 10ch; }
+      }
+      /* Mobile-friendly stacked card view */
+      @media (max-width: 700px){
+        .table-wrap{ border:0; }
+        table, thead, tfoot{ display:block; }
+        thead{ position:absolute; left:-9999px; }
+        tbody{ display:grid; gap:.75rem; }
+        tbody tr{ display:grid; border:1px solid color-mix(in oklab, CanvasText 15%, transparent); border-radius:12px; padding:.5rem .5rem; background: color-mix(in oklab, Canvas 98%, CanvasText 2%); }
+        tbody td{ display:grid; grid-template-columns: 10ch 1fr; gap:.5rem; border:none; padding:.25rem .3rem; }
+        tbody td::before{ content: attr(data-label); font-weight:600; opacity:.8; }
+      }
     </style>
   </head>
   <body>
@@ -33,7 +53,7 @@
         <a class="back" href="../index.html" aria-label="Back to projects"><span>←</span><span>Back</span></a>
         <h1>Political predictions (2025–2029)</h1>
       </header>
-      <p class="meta">Predictions recorded: Aug 31, 2025 · Source file: <a href="./Political-predictions-2025-2029.xlsx">Political-predictions-2025-2029.xlsx</a> · Sheet: <code>Modified</code></p>
+      <p class="meta">Predictions recorded: Aug 31, 2025</p>
 
       <div class="table-wrap">
         <table id="predictions">
@@ -41,100 +61,100 @@
             <tr>
               <th class="sortable" data-type="number"># <span class="arrow">⇅</span></th>
               <th>Prediction</th>
-              <th class="sortable" data-type="date">Date made <span class="arrow">⇅</span></th>
-              <th class="sortable" data-type="text">Deadline / Window <span class="arrow">⇅</span></th>
+              <th class="sortable datecol" data-type="date">Date made <span class="arrow">⇅</span></th>
+              <th class="sortable datecol" data-type="text">Deadline / Window <span class="arrow">⇅</span></th>
               <th class="sortable" data-type="text">Status <span class="arrow">⇅</span></th>
               <th>Notes</th>
             </tr>
           </thead>
           <tbody>
             <tr>
-              <td>1</td>
-              <td>Keir Starmer won’t last a full year as PM (out by Sept 2026).</td>
-              <td>2025-08-31</td>
-              <td>2026-09-01</td>
-              <td>Pending</td>
-              <td>Driven by polling collapse, immigration crisis, internal Labour rebellion.</td>
+              <td data-label="#">1</td>
+              <td data-label="Prediction">Keir Starmer won’t last a full year as PM (out by Sept 2026).</td>
+              <td class="datecol" data-label="Date made">2025-08-31</td>
+              <td class="datecol" data-label="Deadline / Window">2026-09-01</td>
+              <td data-label="Status">Pending</td>
+              <td data-label="Notes">Driven by polling collapse, immigration crisis, internal Labour rebellion.</td>
             </tr>
             <tr>
-              <td>2</td>
-              <td>“Remigration” will enter mainstream political discourse (media + politicians) in Western Europe and might become policy in some countries</td>
-              <td>2025-08-31</td>
-              <td>By end 2027</td>
-              <td>Pending</td>
-              <td>Currently fringe → likely to appear in mainstream debates/editorials by 2026–27. Especially plausible in NL, DE, or FR manifestos.</td>
+              <td data-label="#">2</td>
+              <td data-label="Prediction">“Remigration” will enter mainstream political discourse (media + politicians) in Western Europe and might become policy in some countries</td>
+              <td class="datecol" data-label="Date made">2025-08-31</td>
+              <td class="datecol" data-label="Deadline / Window">By end 2027</td>
+              <td data-label="Status">Pending</td>
+              <td data-label="Notes">Currently fringe → likely to appear in mainstream debates/editorials by 2026–27. Especially plausible in NL, DE, or FR manifestos.</td>
             </tr>
             <tr>
-              <td>3</td>
-              <td>One of UK/Sweden/Germany/Netherlands/France will see a landslide right-wing (cultural/conservative) win.</td>
-              <td>2025-08-31</td>
-              <td>By end 2029</td>
-              <td>Pending</td>
-              <td>Candidates: Le Pen in France 2027, PVV in NL 2025, AfD breakthroughs.</td>
+              <td data-label="#">3</td>
+              <td data-label="Prediction">One of UK/Sweden/Germany/Netherlands/France will see a landslide right-wing (cultural/conservative) win.</td>
+              <td class="datecol" data-label="Date made">2025-08-31</td>
+              <td class="datecol" data-label="Deadline / Window">By end 2029</td>
+              <td data-label="Status">Pending</td>
+              <td data-label="Notes">Candidates: Le Pen in France 2027, PVV in NL 2025, AfD breakthroughs.</td>
             </tr>
             <tr>
-              <td>4</td>
-              <td>13 September 2025 London demonstration will be huge and covered in mainstream media.</td>
-              <td>2025-08-31</td>
-              <td>2025-09-01</td>
-              <td>Pending</td>
-              <td>Size + press coverage to be verified. Arranged by Tommy Robinson</td>
+              <td data-label="#">4</td>
+              <td data-label="Prediction">13 September 2025 London demonstration will be huge and covered in mainstream media.</td>
+              <td class="datecol" data-label="Date made">2025-08-31</td>
+              <td class="datecol" data-label="Deadline / Window">2025-09-01</td>
+              <td data-label="Status">Pending</td>
+              <td data-label="Notes">Size + press coverage to be verified. Arranged by Tommy Robinson</td>
             </tr>
             <tr>
-              <td>5</td>
-              <td>Marine Le Pen (Front National) or another candidate from her party wins 2027 French presidential election.</td>
-              <td>2025-08-31</td>
-              <td>2027-04-01</td>
-              <td>Pending</td>
-              <td>Polls show FN leading; Macron term-limited. Likely flashpoint election. Even if establishment is trying to put her in jail.</td>
+              <td data-label="#">5</td>
+              <td data-label="Prediction">Marine Le Pen (Front National) or another candidate from her party wins 2027 French presidential election.</td>
+              <td class="datecol" data-label="Date made">2025-08-31</td>
+              <td class="datecol" data-label="Deadline / Window">2027-04-01</td>
+              <td data-label="Status">Pending</td>
+              <td data-label="Notes">Polls show FN leading; Macron term-limited. Likely flashpoint election. Even if establishment is trying to put her in jail.</td>
             </tr>
             <tr>
-              <td>6</td>
-              <td>Germany: AfD enters a state government coalition (Länder) before 2027.</td>
-              <td>2025-08-31</td>
-              <td>By 2027</td>
-              <td>Pending</td>
-              <td>Already 2nd strongest in polls; Even if remaining parties are trying to freeze them out or even outlawing the party, public pressure will be to high</td>
+              <td data-label="#">6</td>
+              <td data-label="Prediction">Germany: AfD enters a state government coalition (Länder) before 2027.</td>
+              <td class="datecol" data-label="Date made">2025-08-31</td>
+              <td class="datecol" data-label="Deadline / Window">By 2027</td>
+              <td data-label="Status">Pending</td>
+              <td data-label="Notes">Already 2nd strongest in polls; Even if remaining parties are trying to freeze them out or even outlawing the party, public pressure will be to high</td>
             </tr>
             <tr>
-              <td>7</td>
-              <td>Sweden Democrats join national government formally (not just support) by 2026 election.</td>
-              <td>2025-08-31</td>
-              <td>2026-09-01</td>
-              <td>Pending</td>
-              <td>Similar to other countries, Sweden Democrats have been kept from power by the traditional ruling parties. This will change.</td>
+              <td data-label="#">7</td>
+              <td data-label="Prediction">Sweden Democrats join national government formally (not just support) by 2026 election.</td>
+              <td class="datecol" data-label="Date made">2025-08-31</td>
+              <td class="datecol" data-label="Deadline / Window">2026-09-01</td>
+              <td data-label="Status">Pending</td>
+              <td data-label="Notes">Similar to other countries, Sweden Democrats have been kept from power by the traditional ruling parties. This will change.</td>
             </tr>
             <tr>
-              <td>8</td>
-              <td>Netherlands Oct 2025 snap election delivers a win for Geert Wilders party. They will go into goverment</td>
-              <td>2025-08-31</td>
-              <td>2025-10-01</td>
-              <td>Pending</td>
-              <td>Geert Wilders’ PVV likely to dominate after coalition collapse.</td>
+              <td data-label="#">8</td>
+              <td data-label="Prediction">Netherlands Oct 2025 snap election delivers a win for Geert Wilders party. They will go into goverment</td>
+              <td class="datecol" data-label="Date made">2025-08-31</td>
+              <td class="datecol" data-label="Deadline / Window">2025-10-01</td>
+              <td data-label="Status">Pending</td>
+              <td data-label="Notes">Geert Wilders’ PVV likely to dominate after coalition collapse.</td>
             </tr>
             <tr>
-              <td>9</td>
-              <td>UK faces another Channel crisis or asylum-hotel flashpoint → major riots/media storm.</td>
-              <td>2025-08-31</td>
-              <td>By mid-2026</td>
-              <td>Pending</td>
-              <td>Pattern of escalating protests suggests another eruption.</td>
+              <td data-label="#">9</td>
+              <td data-label="Prediction">UK faces another Channel crisis or asylum-hotel flashpoint → major riots/media storm.</td>
+              <td class="datecol" data-label="Date made">2025-08-31</td>
+              <td class="datecol" data-label="Deadline / Window">By mid-2026</td>
+              <td data-label="Status">Pending</td>
+              <td data-label="Notes">Pattern of escalating protests suggests another eruption.</td>
             </tr>
             <tr>
-              <td>11</td>
-              <td>German federal election (2029) sees AfD &gt;25% nationally, forcing coalition negotiations.</td>
-              <td>2025-08-31</td>
-              <td>Early 2029</td>
-              <td>Pending</td>
-              <td>Not guaranteed government entry, but will reshape Bundestag balance.</td>
+              <td data-label="#">11</td>
+              <td data-label="Prediction">German federal election (2029) sees AfD &gt;25% nationally, forcing coalition negotiations.</td>
+              <td class="datecol" data-label="Date made">2025-08-31</td>
+              <td class="datecol" data-label="Deadline / Window">Early 2029</td>
+              <td data-label="Status">Pending</td>
+              <td data-label="Notes">Not guaranteed government entry, but will reshape Bundestag balance.</td>
             </tr>
             <tr>
-              <td>12</td>
-              <td>“Free speech crackdowns (jailing for posts, policing protests) will become a top-3 political issue in the UK by 2027, fuelling Reform’s rise”</td>
-              <td>2025-08-31</td>
-              <td>By 2027</td>
-              <td>Pending</td>
-              <td>They can&#39;t course correct and will keep jailing people for speech which will increase the problem</td>
+              <td data-label="#">12</td>
+              <td data-label="Prediction">“Free speech crackdowns (jailing for posts, policing protests) will become a top-3 political issue in the UK by 2027, fuelling Reform’s rise”</td>
+              <td class="datecol" data-label="Date made">2025-08-31</td>
+              <td class="datecol" data-label="Deadline / Window">By 2027</td>
+              <td data-label="Status">Pending</td>
+              <td data-label="Notes">They can&#39;t course correct and will keep jailing people for speech which will increase the problem</td>
             </tr>
           </tbody>
           <tfoot>
@@ -184,4 +204,3 @@
     </script>
   </body>
 </html>
-
