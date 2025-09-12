@@ -14,7 +14,7 @@
       h1{ margin:.25rem 0; font-size: clamp(1.6rem, 3.5vw, 2.1rem); text-align:center; flex: 1 1 100%; }
       .back{ text-decoration:none; display:inline-flex; align-items:center; gap:.4rem; padding:.45rem .7rem; border-radius:10px; border:1px solid color-mix(in oklab, CanvasText 20%, transparent); }
       .back:hover{ background: color-mix(in oklab, Canvas 94%, CanvasText 4%); }
-      .meta{ opacity:.85; font-size:.95rem; margin:.25rem 0 1rem; }
+      .meta{ opacity:.85; font-size:.95rem; margin:.25rem 0 1rem; text-align:center; }
       .table-wrap{ overflow:auto; border:1px solid color-mix(in oklab, CanvasText 15%, transparent); border-radius:12px; }
       table{ width:100%; border-collapse:collapse; font-size:.96rem; }
       thead th{ position:sticky; top:0; background: color-mix(in oklab, Canvas 96%, CanvasText 3%); text-align:left; }
@@ -25,6 +25,9 @@
       tfoot td{ padding:.65rem .6rem; }
       .note{ opacity:.8; font-size:.9rem; }
       code{ font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; }
+      /* Centered intro block */
+      .intro{ margin:.75rem auto 1.25rem; max-width:70ch; padding:.85rem 1rem; border:1px solid color-mix(in oklab, CanvasText 15%, transparent); border-radius:12px; background: color-mix(in oklab, Canvas 96%, CanvasText 3%); text-align:left; }
+      .intro h2{ margin:0 0 .5rem; font-size:1.1rem; }
       /* Auto-number rows in the first column and make them bold */
       tbody{ counter-reset: row; }
       td.rownum > span.n::before{ counter-increment: row; content: counter(row); font-weight: 700; }
@@ -59,6 +62,18 @@
         <h1>Political predictions (2025–2029)</h1>
       </header>
       <p class="meta">Predictions recorded: Aug 31, 2025</p>
+      <div class="intro">
+        <h2>Background and introduction</h2>
+        <p>
+          People today get their news from very different sources. Some rely on legacy media, others follow X, Facebook, or different social platforms, and many mix several channels. The result is that people can form entirely different views of what’s happening in the world. Whole stories may be covered by only one side of the aisle, and other stories can be framed so differently that they feel like two separate realities.
+        </p>
+        <p>
+          There’s a reasonable concern about echo chambers that feed back what we want to hear. It’s a fair worry, especially since (in my opinion) much of the legacy press has shifted left, and social platforms optimize for content we engage with. Personally, I don’t think I’m living in a bubble with a skewed version of reality; I believe I have a decent sense of what’s going on, broadly speaking. To put my money where my mouth is, I’m noting a few concrete political predictions below.
+        </p>
+        <p>
+          Obviously, making predictions is difficult—especially about the future—but I think there’s a good chance that more than one of these will materialize. Note that these are not intended to reflect my personal opinions; they’re simply my best speculations about the future, stated as tangible points.
+        </p>
+      </div>
 
       <div class="table-wrap">
         <table id="predictions">
@@ -87,7 +102,7 @@
               <td class="datecol" data-label="Date made">2025-08-31</td>
               <td class="datecol" data-label="Deadline">2027-12-31</td>
               <td data-label="Status">Pending</td>
-              <td data-label="Notes">Currently a fringe term → likely to appear in mainstream debates/editorials by 2026–27. Especially plausible in NL, DE, SE, or FR manifestos.</td>
+              <td data-label="Notes">Currently a fringe term → likely to appear in mainstream debates/editorials by 2026–27. Especially plausible in NL, DE, SE, UK, or FR manifestos.</td>
             </tr>
             <tr>
               <td class="rownum" data-label="#"><span class="n"></span></td>
@@ -101,7 +116,7 @@
               <td class="rownum" data-label="#"><span class="n"></span></td>
               <td data-label="Prediction">13 September 2025 London demonstration (free speech and immigration) will be huge and covered in mainstream media.</td>
               <td class="datecol" data-label="Date made">2025-08-31</td>
-              <td class="datecol" data-label="Deadline">2025-09-01</td>
+              <td class="datecol" data-label="Deadline">2025-09-13</td>
               <td data-label="Status">Pending</td>
               <td data-label="Notes">Size + press coverage to be verified. Arranged by Tommy Robinson</td>
             </tr>
