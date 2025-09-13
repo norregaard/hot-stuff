@@ -33,6 +33,12 @@
       td.rownum > span.n::before{ counter-increment: row; content: counter(row); font-weight: 700; }
       /* Dates look cleaner with tabular numerals and no wrapping */
       th.datecol, td.datecol{ white-space: nowrap; font-variant-numeric: tabular-nums; }
+      /* Documentation block styles */
+      .docs{ margin-top: 2rem; }
+      .docs h3{ margin:.25rem 0 .5rem; font-size:1.05rem; }
+      figure{ margin: 1rem 0; }
+      figure img{ max-width:100%; height:auto; display:block; margin:0 auto; border-radius:8px; }
+      figcaption{ text-align:center; font-size:.9rem; opacity:.8; margin-top:.4rem; }
       /* Reasonable min widths for key columns on larger screens */
       @media (min-width: 800px){
         th:nth-child(1), td:nth-child(1){ width: 4ch; }
@@ -114,11 +120,11 @@
             </tr>
             <tr>
               <td class="rownum" data-label="#"><span class="n"></span></td>
-              <td data-label="Prediction">13 September 2025 London demonstration (free speech and immigration) will be huge and covered in mainstream media.</td>
+              <td data-label="Prediction">13 September 2025 London demonstration (free speech and immigration) will be huge and covered in mainstream media. Update on 2025-09-12: My guess is 100,000+ attendees.</td>
               <td class="datecol" data-label="Date made">2025-08-31</td>
               <td class="datecol" data-label="Deadline">2025-09-13</td>
-              <td data-label="Status">Pending</td>
-              <td data-label="Notes">Size + press coverage to be verified. Arranged by Tommy Robinson. Update on 2025.09.12: I'm guessing 100.000+ attendees.</td>
+              <td data-label="Status">Completed ✅</td>
+              <td data-label="Notes">Reported attendance ~110,000 (likely higher). Broad mainstream coverage, though often negative in tone. Outcome met: large turnout and significant press coverage.</td>
             </tr>
             <tr>
               <td class="rownum" data-label="#"><span class="n"></span></td>
@@ -159,6 +165,39 @@
           </tfoot>
         </table>
       </div>
+
+      <section id="documentation" class="docs">
+        <h2>Documentation</h2>
+        <article>
+          <h3>13 Sep 2025 London Protest — Attendance and coverage</h3>
+          <figure>
+            <img src="./images/13septLondonProtest1.jpeg" alt="Crowd at the 13 September 2025 London protest in London" loading="lazy" />
+            <figcaption>Captured at the 13 Sep 2025 protest. Reports suggest ~110,000 participants; coverage across major outlets, often critical in framing.</figcaption>
+          </figure>
+          <ul>
+            <li><strong>Attendance:</strong> Current reports cite around 110,000; likely higher.</li>
+            <li><strong>Coverage:</strong> Broad mainstream coverage, though frequently negative in tone.</li>
+          </ul>
+          <details>
+            <summary>Sources</summary>
+            <p>Coverage and references to police attendance estimates (CCTV and aerial analysis). Timestamps/quotes added where available:</p>
+            <ul>
+              <li>
+                <a href="https://youtu.be/Q0HHZbvvQOE?si=znvIHMiMBlqvttlz" rel="nofollow noopener">YouTube: Aerial footage shows scale of ‘unite the kingdom’ rally</a>
+                <br /><small>Quote (video description): “Aerial footage shows a crowd of tens of thousands of people marching through central London on Saturday …”</small>
+              </li>
+              <li>
+                <a href="https://www.theguardian.com/politics/live/2025/sep/13/uk-politics-latest-news-unite-the-kingdom-march-far-right-rally-london-labour-keir-starmer?page=with%3Ablock-68c564828f086519d3271603&utm_source=chatgpt.com" rel="nofollow noopener">The Guardian live blog</a>
+                <br /><small>Quote (meta): “Met Police believe 110,000 people attending rally …” · Published: 2025-09-13</small>
+              </li>
+              <li>
+                <a href="https://www.itv.com/news/2025-09-12/thousands-to-descend-on-london-for-tommy-robinson-rally-and-counter-protest?utm_source=chatgpt.com" rel="nofollow noopener">ITV News</a>
+                <br /><small>Published: 2025-09-13 16:18Z. Article covers policing and crowd management; add exact police-estimate quote on next revision if needed.</small>
+              </li>
+            </ul>
+          </details>
+        </article>
+      </section>
     </div>
 
     <script>
