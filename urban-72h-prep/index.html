@@ -1,0 +1,208 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>72‑hour Urban Outage Prep</title>
+    <meta name="description" content="Practical, non-doomsday checklist for 72 hours without power and water in a city apartment." />
+    <style>
+      :root{ color-scheme: light dark; }
+      *{ box-sizing:border-box }
+      body{ margin:0; font-family: system-ui, -apple-system, Segoe UI, Roboto, sans-serif; line-height:1.55; }
+      .wrap{ max-width: 1000px; margin: 0 auto; padding: 1.25rem 1rem 3rem; }
+      header{ display:flex; align-items:center; gap:1rem; flex-wrap:wrap; }
+      h1{ margin:.25rem 0; font-size: clamp(1.6rem, 3.5vw, 2.2rem); text-align:center; flex: 1 1 100%; }
+      .back{ text-decoration:none; display:inline-flex; align-items:center; gap:.4rem; padding:.45rem .7rem; border-radius:10px; border:1px solid color-mix(in oklab, CanvasText 20%, transparent); }
+      .back:hover{ background: color-mix(in oklab, Canvas 94%, CanvasText 4%); }
+      .intro{ margin:.5rem auto 1rem; max-width: 75ch; text-align:left; }
+      .intro p{ margin:.4rem 0; }
+      .grid{ display:grid; gap:1rem; grid-template-columns: repeat(2, minmax(0,1fr)); }
+      @media (max-width: 800px){ .grid{ grid-template-columns: 1fr; } }
+      section.card{ border:1px solid color-mix(in oklab, CanvasText 18%, transparent); border-radius:12px; padding: .9rem 1rem; background: color-mix(in oklab, Canvas 96%, CanvasText 3%); }
+      section.card h2{ margin:.1rem 0 .4rem; font-size:1.2rem; }
+      .sub{ margin:.25rem 0 .2rem; font-size:1rem; font-weight:600; }
+      ul.check{ list-style:none; padding:0; margin:0; }
+      ul.check li{ display:flex; gap:.6rem; align-items:flex-start; margin:.35rem 0; }
+      /* Normalize checkbox look/size across the page */
+      ul.check input[type=checkbox]{ width:1.1rem; height:1.1rem; margin-top:.2rem; accent-color: color-mix(in oklab, CanvasText 60%, Canvas 0%); flex:0 0 1.1rem; }
+      ul.check li span{ flex:1; }
+      .hint{ font-size:.92rem; opacity:.9; }
+      .muted{ opacity:.8; }
+      .note{ font-size:.9rem; opacity:.85; }
+      .kbd{ font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size:.9em; }
+      .badge{ display:inline-block; padding:.15rem .45rem; border-radius:999px; border:1px solid color-mix(in oklab, CanvasText 25%, transparent); margin-right:.35rem; }
+      .numbers{ display:flex; gap:1rem; flex-wrap:wrap; margin:.4rem 0 .8rem; }
+      .numbers div{ padding:.35rem .55rem; border-radius:10px; border:1px dashed color-mix(in oklab, CanvasText 20%, transparent); }
+      footer{ margin-top: 1.5rem; font-size:.9rem; opacity:.8; }
+      @media print{ .back{ display:none } a{ color: inherit; } .card{ break-inside: avoid; } }
+    </style>
+  </head>
+  <body>
+    <div class="wrap">
+      <header>
+        <a class="back" href="../index.html" aria-label="Back to projects"><span>←</span><span>Back</span></a>
+        <h1>72‑hour Urban Outage Prep</h1>
+      </header>
+
+      <div class="intro">
+        <p class="muted"><span class="badge">Scenario</span> Power and running water are unavailable city‑wide for about 72 hours. You’re at home in your apartment (with optional small basement storage). Shops may be open briefly but card payments and ATMs do not work; mobile networks and internet are unreliable; emergency lines are congested; toilets do not flush, no running water.</p>
+        <div class="numbers">
+          <div><strong>Water:</strong> plan ~3 L per person per day → ~9 L per person for 72h</div>
+          <div><strong>Food:</strong> ~2,000–2,400 kcal/day adult (adjust to needs)</div>
+          <div><strong>Lighting:</strong> 1 headlamp + 1 lantern per household (that can light up a room), spare batteries and power banks</div>
+        </div>
+        <p class="note">This is a sober, practical list—not doomsday</p>
+      </div>
+
+      <div class="grid">
+        <section class="card">
+          <h2>Water</h2>
+          <h3 class="sub">Essentials</h3>
+          <ul class="check">
+            <li><input type="checkbox"/><span>Stored drinking water: at least 9 L per person (stackable 5–10 L containers or 1.5 L bottles).</span></li>
+            <li><input type="checkbox"/><span>Disinfection: purification tablets or a gas stove to boil water.</span></li>
+          </ul>
+          <h3 class="sub">Extras</h3>
+          <ul class="check">
+            <li><input type="checkbox"/><span><a href="https://www.thansen.dk/camping/vand-sanitet-og-toilet/vanddunke-og-beholdere/n-233547716" target="_blank" rel="noopener">20 L water jug (options)</a> for extra reserve.</span></li>
+            <li><input type="checkbox"/><span>Compact water filter (squeeze or straw type; e.g., <a href="https://eu.lifestraw.com/collections/straw-filters/products/lifestraw" target="_blank" rel="noopener">LifeStraw</a>) as last‑resort treatment.</span></li>
+            <li><input type="checkbox"/><span>Preservation tablets: Aqua Clean pills to keep 20 L containers fresh for up to 6 months (<a href="https://www.thansen.dk/camping/vand-sanitet-og-toilet/vandrensningstabletter-og-vaeske/vandrens-aqua-clean-til-drikkevand-tablet/n-233547302/pn-233547275" target="_blank" rel="noopener">product link</a>).</span></li>
+          </ul>
+          <p class="hint">Store the bulk in the coolest available spot (often a basement room). Rotate every 6 months.</p>
+        </section>
+
+        <section class="card">
+          <h2>Food (no/low cook)</h2>
+          <h3 class="sub">Essentials</h3>
+          <ul class="check">
+            <li><input type="checkbox"/><span>Ready‑to‑eat: canned fish, beans, veg, fruit, shelf‑stable soups, protein bars.</span></li>
+            <li><input type="checkbox"/><span>Dry goods: Rice, pasta, instant noodles, 'knækbrød', crackers, nuts, candy, Nescafe</span></li>
+          </ul>
+          <h3 class="sub">Extras</h3>
+          <ul class="check">
+            <li><input type="checkbox"/><span>Tea/coffee sachets, spices/condiments, whisky or similar for morale.</span></li>
+            <li><input type="checkbox"/><span>Multivitamin; shelf‑stable ready meals (MRE‑type) for variety.</span></li>
+          </ul>
+          <p class="hint">Emphasize foods you already eat—rotate through normal use. Keep at least 3 days of calories per person.</p>
+        </section>
+
+        <section class="card">
+          <h2>Cooking & heat (indoor‑safe)</h2>
+          <h3 class="sub">Essentials</h3>
+          <ul class="check">
+            <li><input type="checkbox"/><span><a href="https://www.amazon.de/s?k=camping+stove&crid=3JYSAEL0S16HM&sprefix=camping+stove%2Caps%2C110&ref=nb_sb_noss_1" target="_blank" rel="noopener">Camping stoves (options)</a> — choose a tabletop model suitable for indoor use</span></li>
+            <li><input type="checkbox"/><span><a href="https://www.thansen.dk/camping/gas-og-varme/gasdaaser/n-233438425" target="_blank" rel="noopener">Extra gas canisters (220 g)</a> — stock several spares compatible with your stove.</span></li>
+            <li><input type="checkbox"/><span>Matches and lighters, stored dry.</span></li>
+          </ul>
+          <h3 class="sub">Extras</h3>
+          <ul class="check">
+            <li><input type="checkbox"/><span>Trangia cooking set (alcohol stove with pots/pan), they also have a gas option</span></li>
+          </ul>
+          <p class="hint">Store fuel sources away from ignition sources and living spaces.</p>
+        </section>
+
+        <section class="card">
+          <h2>Lighting & power</h2>
+          <h3 class="sub">Essentials</h3>
+          <ul class="check">
+            <li><input type="checkbox"/><span>Headlamps for each adult; <a href="https://www.amazon.de/s?k=lantern+usb+c&crid=3J4BW4SW3EX10&sprefix=lantern+usb+c%2Caps%2C91&ref=nb_sb_noss_2" target="_blank" rel="noopener">LED lantern</a> for a main room. (generally, ensure that all eletrical devices are USB-C rechargeable)</span></li>
+            <li><input type="checkbox"/><span>2 × 20,000 mAh power banks.</span></li>
+            <li><input type="checkbox"/><span>Spare AA and AAA batteries.</span></li>
+            <li><input type="checkbox"/><span>Device charging cables (USB‑C/Lightning/Micro‑USB as needed).</span></li>
+            <li><input type="checkbox"/><span>Battery AM/FM radio (or hand‑crank).</span></li>
+            <li><input type="checkbox"/><span>Candles</span></li>
+          </ul>
+          <h3 class="sub">Extras</h3>
+          <ul class="check">
+            <li><input type="checkbox"/><span>Flashlights</span></li>
+          </ul>
+          <p class="hint">Maintenance: recharge all rechargeable devices (power banks, lanterns, headlamps, radios) at least every 6 months.</p>
+        </section>
+
+        <section class="card">
+          <h2>Sanitation (no running water, no flush)</h2>
+          <h3 class="sub">Essentials</h3>
+          <ul class="check">
+            <li><input type="checkbox"/><span>Toilet kit: heavy‑duty trash bags, toilet liners or a big bucket with lid, zip ties.</span></li>
+            <li><input type="checkbox"/><span>Keep extra toilet paper and paper towels</span></li>
+            <li><input type="checkbox"/><span>Personal hygiene: wet wipes, hand sanitizer, soap</span></li>
+          </ul>
+        </section>
+
+        <section class="card">
+          <h2>Medical & safety</h2>
+          <h3 class="sub">Essentials</h3>
+          <ul class="check">
+            <li><input type="checkbox"/><span>First aid kit (bandages, antiseptic, gauze, tape, pain/fever meds, antihistamine).</span></li>
+            <li><input type="checkbox"/><span>Prescription meds: 3–7 day buffer where possible; copies of prescriptions.</span></li>
+            <li><input type="checkbox"/><span>Disposable gloves</span></li>
+          </ul>
+         
+        </section>
+
+        <section class="card">
+          <h2>Cash, docs & comms</h2>
+          <h3 class="sub">Essentials</h3>
+          <ul class="check">
+            <li><input type="checkbox"/><span>Cash for 3 days (2-3000 DKK): small bills and coins (card terminals/ATMs may be down).</span></li>
+            <li><input type="checkbox"/><span>Printed emergency contacts and local maps (Kraks kort); meeting point plan.</span></li>
+            <li><input type="checkbox"/><span>Meeting point plan, scheduled meet-ups</span></li>
+          </ul>
+          <h3 class="sub">Extras</h3>
+          <ul class="check">
+            <li><input type="checkbox"/><span>Walkie‑talkies (e.g., PMR446 in EU / FRS in US) for local comms. Note: very short range in dense cities (often a few blocks), best with line‑of‑sight.</span></li>
+          </ul>
+        </section>
+
+        
+
+        <section class="card">
+          <h2>Tools & apartment items</h2>
+          <h3 class="sub">Essentials</h3>
+          <ul class="check">
+            <li><input type="checkbox"/><span>Multi‑tool, duct tape, zip ties, small toolkit (screwdrivers, wrench, pliers).</span></li>
+            <li><input type="checkbox"/><span>Plastic bags, tinfoil, food‑safe storage bags.</span></li>
+          </ul>
+          <h3 class="sub">Extras</h3>
+          <ul class="check">
+            <li><input type="checkbox"/><span>Spare fuses (if relevant)</span></li>
+            <li><input type="checkbox"/><span>Proper fixed blade knife, for the apocalypse</span></li>
+            <li><input type="checkbox"/><span>Rope, paracord</span></li>
+          </ul>
+        </section>
+
+        <section class="card">
+          <h2>Barter items</h2>
+          <h3 class="sub">Essentials</h3>
+          <ul class="check">
+            <li><input type="checkbox"/><span>Extra cash</span></li>
+            <li><input type="checkbox"/><span>Disposable lighters and matches.</span></li>
+            <li><input type="checkbox"/><span>AA/AAA batteries (common sizes).</span></li>
+          </ul>
+          <h3 class="sub">Extras</h3>
+          <ul class="check">
+            <li><input type="checkbox"/><span>Cheap flashlights</span></li>
+            <li><input type="checkbox"/><span>Small 5,000–10,000 mAh power bank for trade/loan</span></li>
+            <li><input type="checkbox"/><span>Small‑denomination silver coins or bullion (e.g., 1/10–1 oz), stored discreetly.</span></li>
+            <li><input type="checkbox"/><span>Mini bottles of alcohol (whisky/vodka), factory‑sealed for trade/gifting.</span></li>
+            <li><input type="checkbox"/><span>Sealed bottled water (0.5–1.5 L) or spare 5–10 L jugs.</span></li>
+            <li><input type="checkbox"/><span>Spare charging cables (USB‑C/Lightning)</span></li>
+            <li><input type="checkbox"/><span>Hygiene basics: wet wipes, hand sanitizer, toilet paper, heavy‑duty trash bags.</span></li>
+            <li><input type="checkbox"/><span>Menstrual products; small pack of diapers (if relevant).</span></li>
+            <li><input type="checkbox"/><span>Candles</span></li>
+          </ul>
+          <p class="hint">Trade ethically and legally. Prioritize safety; avoid advertising valuables. Observe local laws and age restrictions.</p>
+        </section>
+
+        
+      </div>
+
+      
+
+      <footer>
+        <p>Print this page and keep it with your kit. If you receive warning before an outage, fill any bathtubs/sinks, charge all power banks, and cook perishable food first.</p>
+        <p>Official guidance (DK): <a href="https://www.brs.dk/globalassets/brs---beredskabsstyrelsen/dokumenter/krisekommunikation/2024/-tjekliste-.pdf" target="_blank" rel="noopener">Beredskabsstyrelsen – Tjekliste (PDF)</a></p>
+      </footer>
+    </div>
+  </body>
+  </html>
