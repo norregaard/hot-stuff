@@ -11,27 +11,81 @@
     <link rel="manifest" href="/assets/favicons/site.webmanifest" />
     <link rel="shortcut icon" href="/assets/favicons/favicon.ico" />
     <style>
-      :root{ color-scheme: light dark; }
-      *{ box-sizing:border-box }
-      body{ margin:0; font-family: system-ui, -apple-system, Segoe UI, Roboto, sans-serif; line-height:1.55; }
-      .wrap{ max-width: 1100px; margin: 0 auto; padding: 1.25rem 1rem 3rem; }
-      header{ display:flex; align-items:center; gap:1rem; flex-wrap:wrap; }
+      :root {
+        color-scheme: light dark;
+        --bg: #070512;
+        --fg: #f7f8ff;
+        --muted: rgba(247, 248, 255, 0.7);
+        --card: rgba(16, 14, 34, 0.82);
+        --border: rgba(255, 255, 255, 0.12);
+        --shadow: rgba(9, 6, 24, 0.35);
+        --accent: #ff6f61;
+      }
+
+      @media (prefers-color-scheme: light) {
+        :root {
+          --bg: #f3f5ff;
+          --fg: #15131f;
+          --muted: rgba(21, 19, 31, 0.65);
+          --card: rgba(255, 255, 255, 0.94);
+          --border: rgba(21, 19, 31, 0.08);
+          --shadow: rgba(31, 28, 62, 0.12);
+        }
+      }
+
+      * { box-sizing:border-box }
+      body{
+        margin:0;
+        font-family: "Inter", "Segoe UI", system-ui, -apple-system, sans-serif;
+        line-height:1.55;
+        color: var(--fg);
+        background-color: var(--bg);
+        min-height: 100vh;
+        position: relative;
+      }
+
+      body::before{
+        content:"";
+        position: fixed;
+        inset:0;
+        background:
+          radial-gradient(110% 110% at 90% -10%, rgba(255, 111, 97, 0.22), transparent 70%),
+          radial-gradient(120% 120% at 0% 10%, rgba(122, 92, 255, 0.28), transparent 70%),
+          radial-gradient(140% 140% at 50% 110%, rgba(0, 181, 173, 0.18), transparent 70%);
+        z-index:-2;
+      }
+
+      body::after{
+        content:"";
+        position: fixed;
+        inset:0;
+        background: linear-gradient(180deg, rgba(4, 3, 9, 0.6) 0%, transparent 35%),
+                    linear-gradient(0deg, rgba(4, 3, 9, 0.35) 0%, transparent 50%);
+        z-index:-1;
+        pointer-events:none;
+      }
+
+      .wrap{ max-width: 1100px; margin: 0 auto; padding: 2.2rem 1.2rem 3.5rem; }
+      header{ display:flex; align-items:center; gap:1rem; flex-wrap:wrap; background: var(--card); border: 1px solid var(--border); box-shadow: 0 22px 60px var(--shadow); padding: 1.1rem 1.3rem; border-radius: 18px; }
       h1{ margin:.25rem 0; font-size: clamp(1.6rem, 3.5vw, 2.1rem); text-align:center; flex: 1 1 100%; }
-      .back{ text-decoration:none; display:inline-flex; align-items:center; gap:.4rem; padding:.45rem .7rem; border-radius:10px; border:1px solid color-mix(in oklab, CanvasText 20%, transparent); }
-      .back:hover{ background: color-mix(in oklab, Canvas 94%, CanvasText 4%); }
-      .meta{ opacity:.85; font-size:.95rem; margin:.25rem 0 1rem; text-align:center; }
-      .table-wrap{ overflow:auto; border:1px solid color-mix(in oklab, CanvasText 15%, transparent); border-radius:12px; }
-      table{ width:100%; border-collapse:collapse; font-size:.96rem; }
-      thead th{ position:sticky; top:0; background: color-mix(in oklab, Canvas 96%, CanvasText 3%); text-align:left; }
-      th, td{ padding:.55rem .6rem; border-bottom:1px solid color-mix(in oklab, CanvasText 12%, transparent); vertical-align:top; }
-      tbody tr:hover{ background: color-mix(in oklab, Canvas 97%, CanvasText 2%); }
+      .back{ text-decoration:none; display:inline-flex; align-items:center; gap:.4rem; padding:.45rem .7rem; border-radius:10px; border:1px solid rgba(255,255,255,0.3); color:var(--fg); background: rgba(255,255,255,0.06); transition: background 0.3s ease, transform 0.3s ease; }
+      .back:hover{ background: rgba(255,255,255,0.15); transform: translateY(-1px); }
+      .meta{ opacity:.85; font-size:.95rem; margin:1rem auto 1.5rem; text-align:center; max-width: 55ch; background: var(--card); padding: .6rem .9rem; border-radius: 14px; border:1px solid var(--border); }
+      .table-wrap{ overflow:auto; border:1px solid var(--border); border-radius:18px; background: var(--card); box-shadow: 0 18px 48px var(--shadow); }
+      table{ width:100%; border-collapse:collapse; font-size:.96rem; color:var(--fg); }
+      thead th{ position:sticky; top:0; background: rgba(7,5,18,0.7); text-align:left; backdrop-filter: blur(12px); }
+      @media (prefers-color-scheme: light) {
+        thead th{ background: rgba(243,245,255,0.85); }
+      }
+      th, td{ padding:.65rem .7rem; border-bottom:1px solid rgba(255,255,255,0.08); vertical-align:top; }
+      tbody tr:hover{ background: rgba(255,255,255,0.04); }
       th.sortable{ cursor:pointer; }
       th.sortable .arrow{ opacity:.5; font-size:.85em; }
       tfoot td{ padding:.65rem .6rem; }
       .note{ opacity:.8; font-size:.9rem; }
       code{ font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; }
       /* Centered intro block */
-      .intro{ margin:.75rem auto 1.25rem; max-width:70ch; padding:.85rem 1rem; border:1px solid color-mix(in oklab, CanvasText 15%, transparent); border-radius:12px; background: color-mix(in oklab, Canvas 96%, CanvasText 3%); text-align:left; }
+      .intro{ margin:1.25rem auto 1.5rem; max-width:70ch; padding:1.3rem 1.4rem; border:1px solid var(--border); border-radius:18px; background: var(--card); text-align:left; box-shadow: 0 16px 40px var(--shadow); }
       .intro h2{ margin:0 0 .5rem; font-size:1.1rem; }
       /* Auto-number rows in the first column and make them bold */
       tbody{ counter-reset: row; }
@@ -41,9 +95,9 @@
       /* Documentation block styles */
       .docs{ margin-top: 2rem; }
       .docs h3{ margin:.25rem 0 .5rem; font-size:1.05rem; }
-      figure{ margin: 1rem 0; }
-      figure img{ max-width:100%; height:auto; display:block; margin:0 auto; border-radius:8px; }
-      figcaption{ text-align:center; font-size:.9rem; opacity:.8; margin-top:.4rem; }
+      figure{ margin: 1.4rem auto; max-width: 420px; background: var(--card); padding: 1rem; border-radius: 18px; border: 1px solid var(--border); box-shadow: 0 16px 36px var(--shadow); }
+      figure img{ max-width:100%; height:auto; display:block; margin:0 auto; border-radius:12px; }
+      figcaption{ text-align:center; font-size:.9rem; opacity:.8; margin-top:.6rem; }
       /* Reasonable min widths for key columns on larger screens */
       @media (min-width: 800px){
         th:nth-child(1), td:nth-child(1){ width: 4ch; }
@@ -56,11 +110,11 @@
       @media (max-width: 700px){
         html, body{ width:100%; overflow-x:hidden; }
         .wrap{ padding-left:.75rem; padding-right:.75rem; }
-        .table-wrap{ border:0; overflow-x:hidden; }
+        .table-wrap{ border:0; overflow-x:hidden; background: transparent; box-shadow: none; }
         table, thead, tfoot{ display:block; width:100%; }
         thead{ position:absolute; left:-9999px; }
         tbody{ display:grid; gap:.75rem; margin:0; width:100%; }
-        tbody tr{ display:grid; width:100%; box-sizing:border-box; border:1px solid color-mix(in oklab, CanvasText 15%, transparent); border-radius:12px; padding:.5rem .6rem; background: color-mix(in oklab, Canvas 98%, CanvasText 2%); }
+        tbody tr{ display:grid; width:100%; box-sizing:border-box; border:1px solid var(--border); border-radius:16px; padding:.75rem .75rem; background: var(--card); box-shadow: 0 12px 28px var(--shadow); }
         tbody td{ display:grid; grid-template-columns: minmax(7.5em, 38%) 1fr; gap:.5rem; border:none; padding:.25rem 0; min-width:0; overflow-wrap:anywhere; word-break: break-word; }
         tbody td::before{ content: attr(data-label); font-weight:600; opacity:.8; align-self:start; }
       }
