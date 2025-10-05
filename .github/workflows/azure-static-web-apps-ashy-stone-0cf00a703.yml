@@ -21,14 +21,14 @@ jobs:
           from pathlib import Path
 
           html_path = Path("brimstone-index/index.html")
-          api_key = os.environ["TWELVE_DATA_API_KEY"]
+          api_key = os.environ["TWELVE_API_KEY"]
           content = html_path.read_text()
           if "__TWELVE_API_KEY__" not in content:
             raise SystemExit("Placeholder __TWELVE_API_KEY__ not found in brimstone-index/index.html")
           html_path.write_text(content.replace("__TWELVE_API_KEY__", api_key))
           PY
         env:
-          TWELVE_DATA_API_KEY: ${{ secrets.TWELVE_DATA_API_KEY }}
+          TWELVE_API_KEY: ${{ secrets.TWELVE_API_KEY }}
       - name: Build And Deploy
         id: builddeploy
         uses: Azure/static-web-apps-deploy@v1
