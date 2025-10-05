@@ -65,11 +65,12 @@
         pointer-events:none;
       }
 
-      .wrap{ max-width: 1100px; margin: 0 auto; padding: 2.2rem 1.2rem 3.5rem; }
-      header{ display:flex; align-items:center; gap:1rem; flex-wrap:wrap; background: var(--card); border: 1px solid var(--border); box-shadow: 0 22px 60px var(--shadow); padding: 1.1rem 1.3rem; border-radius: 18px; }
-      h1{ margin:.25rem 0; font-size: clamp(1.6rem, 3.5vw, 2.1rem); text-align:center; flex: 1 1 100%; }
-      .back{ text-decoration:none; display:inline-flex; align-items:center; gap:.4rem; padding:.45rem .7rem; border-radius:10px; border:1px solid rgba(255,255,255,0.3); color:var(--fg); background: rgba(255,255,255,0.06); transition: background 0.3s ease, transform 0.3s ease; }
-      .back:hover{ background: rgba(255,255,255,0.15); transform: translateY(-1px); }
+      .wrap{ position: relative; max-width: 1100px; margin: 0 auto; padding: 2.2rem 1.2rem 3.5rem; }
+      header{ display:flex; align-items:center; justify-content:center; background: var(--card); border: 1px solid var(--border); box-shadow: 0 22px 60px var(--shadow); padding: 2.2rem 1.6rem; border-radius: 18px; text-align:center; }
+      h1{ margin:0; font-size: clamp(1.7rem, 3.6vw, 2.35rem); }
+      .back{ text-decoration:none; display:inline-flex; align-items:center; gap:.4rem; padding:.48rem .8rem; border-radius:999px; border:1px solid rgba(255,255,255,0.35); color:var(--fg); background: rgba(255,255,255,0.08); transition: background 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease; box-shadow: 0 12px 24px rgba(9,6,24,0.35); }
+      .back:hover{ background: rgba(255,255,255,0.18); transform: translateY(-1px); }
+      .back-floating{ position: relative; z-index: 2; margin-left: clamp(1rem, 5vw, 1.8rem); margin-bottom: 0.75rem; display:inline-flex; }
       .meta{ opacity:.85; font-size:.95rem; margin:1rem auto 1.5rem; text-align:center; max-width: 55ch; background: var(--card); padding: .6rem .9rem; border-radius: 14px; border:1px solid var(--border); }
       .table-wrap{ overflow:auto; border:1px solid var(--border); border-radius:18px; background: var(--card); box-shadow: 0 18px 48px var(--shadow); }
       table{ width:100%; border-collapse:collapse; font-size:.96rem; color:var(--fg); }
@@ -95,9 +96,19 @@
       /* Documentation block styles */
       .docs{ margin-top: 2rem; }
       .docs h3{ margin:.25rem 0 .5rem; font-size:1.05rem; }
-      figure{ margin: 1.4rem auto; max-width: 420px; background: var(--card); padding: 1rem; border-radius: 18px; border: 1px solid var(--border); box-shadow: 0 16px 36px var(--shadow); }
-      figure img{ max-width:100%; height:auto; display:block; margin:0 auto; border-radius:12px; }
+      figure{ margin: 1.4rem auto; max-width: 420px; background: var(--card); padding: 1rem; border-radius: 18px; border: 1px solid var(--border); box-shadow: 0 16px 36px var(--shadow); cursor: pointer; }
+      figure img{ max-width:100%; height:auto; display:block; margin:0 auto; border-radius:12px; transition: transform 0.3s ease; }
+      figure:hover img{ transform: scale(1.02); }
       figcaption{ text-align:center; font-size:.9rem; opacity:.8; margin-top:.6rem; }
+      .modal[hidden]{ display:none; }
+      .modal{ position:fixed; inset:0; z-index:1000; display:flex; align-items:center; justify-content:center; padding:1.5rem; }
+      .modal-backdrop{ position:absolute; inset:0; background:rgba(0,0,0,0.7); backdrop-filter: blur(4px); }
+      .modal-content{ position:relative; max-width:min(90vw, 1000px); max-height:90vh; margin:0; padding:1.2rem 1.4rem 1.6rem; border-radius:20px; background:rgba(16,14,34,0.93); border:1px solid rgba(255,255,255,0.15); box-shadow:0 30px 80px rgba(0,0,0,0.6); }
+      .modal-content img{ width:100%; height:auto; max-height:70vh; object-fit:contain; border-radius:14px; }
+      .modal-content figcaption{ margin-top:0.8rem; font-size:0.95rem; color:var(--muted); text-align:center; }
+      .modal-close{ position:absolute; top:0.6rem; right:0.75rem; border:0; background:transparent; color:var(--fg); font-size:1.9rem; line-height:1; cursor:pointer; padding:0.2rem; }
+      .modal-close:hover{ color:var(--accent); }
+      body.modal-open{ overflow:hidden; }
       /* Reasonable min widths for key columns on larger screens */
       @media (min-width: 800px){
         th:nth-child(1), td:nth-child(1){ width: 4ch; }
@@ -110,6 +121,8 @@
       @media (max-width: 700px){
         html, body{ width:100%; overflow-x:hidden; }
         .wrap{ padding-left:.75rem; padding-right:.75rem; }
+        header{ padding: 1.8rem 1.2rem 1.9rem; }
+        .back-floating{ margin-left: 0.75rem; margin-bottom: 0.9rem; }
         .table-wrap{ border:0; overflow-x:hidden; background: transparent; box-shadow: none; }
         table, thead, tfoot{ display:block; width:100%; }
         thead{ position:absolute; left:-9999px; }
@@ -122,9 +135,9 @@
   </head>
   <body>
     <div class="wrap">
+      <a class="back back-floating" href="../index.html" aria-label="Back to projects"><span>←</span><span>Back</span></a>
       <header>
-        <a class="back" href="../index.html" aria-label="Back to projects"><span>←</span><span>Back</span></a>
-        <h1>Political predictions (2025–2029)</h1>
+        <h1>🗳️ Political predictions (2025–2029)</h1>
       </header>
       <p class="meta">Predictions recorded: Aug 31, 2025</p>
       <div class="intro">
@@ -140,7 +153,7 @@
         </p>
       </div>
 
-      <figure>
+      <figure data-image="images/darth-predicter.JPG" data-caption="Keeping receipts, one prediction at a time.">
         <img src="images/darth-predicter.JPG" alt="Darth Vader meme about accurate predictions" loading="lazy" />
         <figcaption>Keeping receipts, one prediction at a time.</figcaption>
       </figure>
@@ -271,6 +284,64 @@
         </article>
       </section>
     </div>
+
+    <div class="modal" id="image-modal" hidden>
+      <div class="modal-backdrop" id="modal-backdrop"></div>
+      <figure class="modal-content">
+        <button class="modal-close" id="modal-close" aria-label="Close image">×</button>
+        <img id="modal-img" alt="Expanded view" />
+        <figcaption id="modal-caption"></figcaption>
+      </figure>
+    </div>
+
+    <script>
+      const modal = document.getElementById('image-modal');
+      const modalImg = document.getElementById('modal-img');
+      const modalCaption = document.getElementById('modal-caption');
+      const modalClose = document.getElementById('modal-close');
+      const modalBackdrop = document.getElementById('modal-backdrop');
+
+      function openModal(src, caption) {
+        modalImg.src = src;
+        modalCaption.textContent = caption || '';
+        modal.removeAttribute('hidden');
+        document.body.classList.add('modal-open');
+      }
+
+      function closeModal() {
+        modal.setAttribute('hidden', '');
+        modalImg.src = '';
+        modalCaption.textContent = '';
+        document.body.classList.remove('modal-open');
+      }
+
+      const initModal = () => {
+        const modalFigures = Array.from(document.querySelectorAll('figure'))
+          .filter(fig => !fig.classList.contains('modal-content') && fig.querySelector('img'));
+
+        modalFigures.forEach(figure => {
+          const img = figure.querySelector('img');
+          if (!img) return;
+          const caption = figure.querySelector('figcaption');
+          figure.addEventListener('click', () => {
+            openModal(img.getAttribute('src'), caption?.textContent?.trim() || '');
+          });
+        });
+
+        [modalClose, modalBackdrop].forEach(el => el.addEventListener('click', closeModal));
+        window.addEventListener('keydown', (event) => {
+          if (event.key === 'Escape' && !modal.hasAttribute('hidden')) {
+            closeModal();
+          }
+        });
+      };
+
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', initModal);
+      } else {
+        initModal();
+      }
+    </script>
 
     <script>
       (function(){

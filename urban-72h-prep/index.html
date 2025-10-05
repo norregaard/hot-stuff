@@ -65,11 +65,12 @@
         pointer-events:none;
       }
 
-      .wrap{ max-width: 1000px; margin: 0 auto; padding: 2.2rem 1.2rem 3.5rem; }
-      header{ display:flex; align-items:center; gap:1rem; flex-wrap:wrap; background: var(--card); border:1px solid var(--border); box-shadow:0 22px 60px var(--shadow); padding:1.1rem 1.3rem; border-radius:18px; }
-      h1{ margin:.25rem 0; font-size: clamp(1.6rem, 3.5vw, 2.2rem); text-align:center; flex: 1 1 100%; }
-      .back{ text-decoration:none; display:inline-flex; align-items:center; gap:.4rem; padding:.45rem .7rem; border-radius:10px; border:1px solid rgba(255,255,255,0.3); color:var(--fg); background: rgba(255,255,255,0.06); transition: background 0.3s ease, transform 0.3s ease; }
-      .back:hover{ background: rgba(255,255,255,0.15); transform: translateY(-1px); }
+      .wrap{ position: relative; max-width: 1000px; margin: 0 auto; padding: 2.2rem 1.2rem 3.5rem; }
+      header{ display:flex; align-items:center; justify-content:center; background: var(--card); border:1px solid var(--border); box-shadow:0 22px 60px var(--shadow); padding:2.2rem 1.6rem; border-radius:18px; text-align:center; }
+      h1{ margin:0; font-size: clamp(1.7rem, 3.8vw, 2.35rem); }
+      .back{ text-decoration:none; display:inline-flex; align-items:center; gap:.4rem; padding:.48rem .8rem; border-radius:999px; border:1px solid rgba(255,255,255,0.35); color:var(--fg); background: rgba(255,255,255,0.08); transition: background 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease; box-shadow:0 12px 24px rgba(9,6,24,0.35); }
+      .back:hover{ background: rgba(255,255,255,0.18); transform: translateY(-1px); }
+      .back-floating{ position: relative; z-index:2; margin-left: clamp(1rem, 5vw, 1.8rem); margin-bottom: 0.75rem; display:inline-flex; }
       .intro{ margin:1.1rem auto 1.5rem; max-width: 75ch; text-align:left; background: var(--card); border:1px solid var(--border); border-radius:18px; padding:1.3rem 1.4rem; box-shadow:0 18px 48px var(--shadow); }
       .intro p{ margin:.4rem 0; }
       .grid{ display:grid; gap:1.3rem; grid-template-columns: repeat(2, minmax(0,1fr)); }
@@ -92,17 +93,21 @@
       .numbers div{ padding:.45rem .65rem; border-radius:12px; border:1px dashed rgba(255,255,255,0.2); background: rgba(255,255,255,0.06); }
       footer{ margin-top: 1.8rem; font-size:.9rem; opacity:.8; text-align:center; }
       @media print{ .back{ display:none } a{ color: inherit; } .card{ break-inside: avoid; } }
+      @media (max-width: 700px){
+        header{ padding: 1.8rem 1.2rem 1.9rem; }
+        .back-floating{ margin-left: 0.75rem; margin-bottom: 0.9rem; }
+      }
     </style>
   </head>
   <body>
     <div class="wrap">
+      <a class="back back-floating" href="../index.html" aria-label="Back to projects"><span>←</span><span>Back</span></a>
       <header>
-        <a class="back" href="../index.html" aria-label="Back to projects"><span>←</span><span>Back</span></a>
-        <h1>72‑hour Urban Outage Prep</h1>
+        <h1>🔦 72‑hour Urban Outage Prep</h1>
       </header>
 
       <div class="intro">
-        <p class="muted"><span class="badge">Scenario</span> Power and running water are unavailable city‑wide for about 72 hours. You’re at home in your apartment (with optional small basement storage). Shops may be open briefly but card payments and ATMs do not work; mobile networks and internet are unreliable; emergency lines are congested; toilets do not flush, no running water, no heating.</p>
+        <p class="muted"><strong>Scenario.</strong> Power and running water are unavailable city‑wide for about 72 hours. You’re at home in your apartment (with optional small basement storage). Shops may be open briefly but card payments and ATMs do not work; mobile networks and internet are unreliable; emergency lines are congested; toilets do not flush, no running water, no heating.</p>
         <div class="numbers">
           <div><strong>Water:</strong> plan ~3 L per person per day → ~9 L per person for 72h</div>
           <div><strong>Food:</strong> ~2,000–2,400 kcal/day adult (adjust to needs)</div>
