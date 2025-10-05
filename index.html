@@ -11,26 +11,369 @@
     <link rel="manifest" href="/assets/favicons/site.webmanifest" />
     <link rel="shortcut icon" href="/assets/favicons/favicon.ico" />
     <style>
-      :root{ color-scheme: light dark; }
-      *{ box-sizing:border-box }
-      body{ margin:0; font-family: system-ui, -apple-system, Segoe UI, Roboto, sans-serif; line-height:1.55; }
-      main{ max-width: 800px; margin: 0 auto; padding: 2rem 1rem 3rem; }
-      h1{ margin:0 0 .5rem; font-size: clamp(1.6rem, 3.5vw, 2.25rem); }
-      p{ margin:.25rem 0 1rem; opacity:.9 }
-      ul{ padding-left: 1.1rem; }
-      a{ color: inherit; }
-      li{ margin:.35rem 0 }
+      :root {
+        color-scheme: light dark;
+        --bg: #070512;
+        --fg: #f7f8ff;
+        --muted: rgba(247, 248, 255, 0.7);
+        --accent: #ff6f61;
+        --accent-2: #7a5cff;
+        --card-bg: rgba(16, 14, 34, 0.78);
+        --card-border: rgba(255, 255, 255, 0.1);
+        --shadow: rgba(9, 6, 24, 0.35);
+        --font: "Inter", "Segoe UI", system-ui, -apple-system, sans-serif;
+      }
+
+      @media (prefers-color-scheme: light) {
+        :root {
+          --bg: #f3f5ff;
+          --fg: #15131f;
+          --muted: rgba(21, 19, 31, 0.65);
+          --card-bg: rgba(255, 255, 255, 0.88);
+          --card-border: rgba(21, 19, 31, 0.08);
+          --shadow: rgba(31, 28, 62, 0.12);
+        }
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        min-height: 100vh;
+        font-family: var(--font);
+        color: var(--fg);
+        background-color: var(--bg);
+        line-height: 1.6;
+        position: relative;
+      }
+
+      body::before {
+        content: "";
+        position: fixed;
+        inset: 0;
+        background:
+          radial-gradient(110% 110% at 90% -10%, rgba(255, 111, 97, 0.22), transparent 70%),
+          radial-gradient(120% 120% at 0% 10%, rgba(122, 92, 255, 0.28), transparent 70%),
+          radial-gradient(140% 140% at 50% 110%, rgba(0, 181, 173, 0.18), transparent 70%);
+        z-index: -2;
+        animation: pulse 18s ease-in-out infinite alternate;
+      }
+
+      body::after {
+        content: "";
+        position: fixed;
+        inset: 0;
+        background: linear-gradient(180deg, rgba(4, 3, 9, 0.5) 0%, transparent 30%), linear-gradient(0deg, rgba(4, 3, 9, 0.35) 0%, transparent 45%);
+        z-index: -1;
+        pointer-events: none;
+      }
+
+      @keyframes pulse {
+        0% {
+          transform: translate3d(0, -12px, 0) scale(1);
+        }
+        100% {
+          transform: translate3d(0, 12px, 0) scale(1.04);
+        }
+      }
+
+      main.page {
+        max-width: 1000px;
+        margin: 0 auto;
+        padding: clamp(2.75rem, 5vw, 4.25rem) 1.5rem 4rem;
+        display: flex;
+        flex-direction: column;
+        gap: clamp(2.5rem, 5vw, 3.5rem);
+        position: relative;
+      }
+
+      .hero {
+        position: relative;
+        padding: clamp(2.6rem, 6vw, 4rem);
+        border-radius: 26px;
+        background: var(--card-bg);
+        border: 1px solid var(--card-border);
+        box-shadow: 0 22px 60px var(--shadow);
+        overflow: hidden;
+      }
+
+      .hero::after {
+        content: "";
+        position: absolute;
+        inset: -40% 10% 30% -30%;
+        background: radial-gradient(circle at 25% 25%, rgba(122, 92, 255, 0.28), transparent 65%);
+        opacity: 0.9;
+        z-index: -1;
+      }
+
+      .hero .orb {
+        position: absolute;
+        width: 260px;
+        height: 260px;
+        top: -120px;
+        right: -70px;
+        background: radial-gradient(circle, rgba(255, 111, 97, 0.65) 0%, transparent 70%);
+        filter: blur(0);
+        opacity: 0.85;
+        animation: drift 12s ease-in-out infinite alternate;
+      }
+
+      @keyframes drift {
+        0% {
+          transform: translate3d(0, 0, 0) rotate(0deg) scale(1);
+        }
+        100% {
+          transform: translate3d(-20px, 18px, 0) rotate(6deg) scale(1.08);
+        }
+      }
+
+      .badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.45rem;
+        padding: 0.45rem 0.9rem;
+        border-radius: 999px;
+        font-size: 0.78rem;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        background: linear-gradient(135deg, rgba(255, 111, 97, 0.25), rgba(122, 92, 255, 0.25));
+        border: 1px solid rgba(255, 255, 255, 0.18);
+        box-shadow: 0 10px 24px rgba(255, 111, 97, 0.25);
+      }
+
+      .hero h1 {
+        margin: 1rem 0 1rem;
+        font-size: clamp(2rem, 6vw, 3rem);
+        letter-spacing: -0.01em;
+      }
+
+      .tagline {
+        margin: 0 0 1.2rem;
+        font-size: clamp(1.05rem, 2.5vw, 1.25rem);
+        max-width: 42ch;
+        color: var(--muted);
+      }
+
+      .hero-notes {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.75rem;
+        font-size: 0.95rem;
+        color: var(--muted);
+      }
+
+      .hero-notes::before {
+        content: "★";
+        font-size: 1.1rem;
+        color: rgba(255, 228, 158, 0.9);
+        filter: drop-shadow(0 6px 12px rgba(255, 183, 77, 0.3));
+      }
+
+      .projects {
+        display: flex;
+        flex-direction: column;
+        gap: 1.5rem;
+      }
+
+      .section-title {
+        margin: 0;
+        font-size: 0.9rem;
+        letter-spacing: 0.2em;
+        text-transform: uppercase;
+        color: var(--muted);
+      }
+
+      .projects-grid {
+        display: grid;
+        gap: 1.3rem;
+        grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      }
+
+      .card {
+        position: relative;
+        display: flex;
+        gap: 1rem;
+        align-items: flex-start;
+        padding: 1.5rem 1.6rem;
+        border-radius: 22px;
+        text-decoration: none;
+        color: inherit;
+        background: var(--card-bg);
+        border: 1px solid var(--card-border);
+        box-shadow: 0 16px 44px var(--shadow);
+        overflow: hidden;
+        transition: transform 0.35s ease, box-shadow 0.35s ease, border-color 0.35s ease;
+      }
+
+      .card::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        border-radius: inherit;
+        padding: 1px;
+        background: linear-gradient(135deg, rgba(255, 111, 97, 0.7), rgba(122, 92, 255, 0.7));
+        -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+        -webkit-mask-composite: xor;
+        mask-composite: exclude;
+        opacity: 0;
+        transition: opacity 0.35s ease;
+        pointer-events: none;
+      }
+
+      .card:hover::before,
+      .card:focus-visible::before {
+        opacity: 0.65;
+      }
+
+      .card:hover,
+      .card:focus-visible {
+        transform: translateY(-6px) scale(1.01);
+        box-shadow: 0 22px 60px rgba(12, 9, 30, 0.42);
+        border-color: rgba(255, 255, 255, 0.25);
+      }
+
+      .card:focus-visible {
+        outline: 3px solid rgba(255, 255, 255, 0.35);
+        outline-offset: 4px;
+      }
+
+      .emoji {
+        font-size: 2rem;
+        line-height: 1;
+        filter: drop-shadow(0 10px 16px rgba(0, 0, 0, 0.35));
+      }
+
+      .card-body h3 {
+        margin: 0 0 0.3rem;
+        font-size: 1.15rem;
+      }
+
+      .card-body p {
+        margin: 0 0 0.85rem;
+        color: var(--muted);
+        font-size: 0.97rem;
+      }
+
+      .cta {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.35rem;
+        font-weight: 600;
+        font-size: 0.95rem;
+        color: var(--accent);
+      }
+
+      .cta::after {
+        content: "→";
+        transition: transform 0.35s ease;
+      }
+
+      .card:hover .cta::after,
+      .card:focus-visible .cta::after {
+        transform: translateX(4px);
+      }
+
+      @media (max-width: 700px) {
+        .hero {
+          padding: 2.3rem 1.6rem 2.4rem;
+          text-align: center;
+        }
+
+        .hero .orb {
+          width: 200px;
+          height: 200px;
+          top: -80px;
+          right: -60px;
+        }
+
+        .badge {
+          margin: 0 auto 0.75rem;
+        }
+
+        .tagline {
+          margin-left: auto;
+          margin-right: auto;
+        }
+
+        .hero-notes {
+          justify-content: center;
+          text-align: center;
+        }
+
+        .projects {
+          gap: 1.1rem;
+        }
+
+        .projects-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .card {
+          padding: 1.3rem 1.4rem;
+        }
+
+        .emoji {
+          font-size: 1.8rem;
+        }
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        body::before,
+        .hero .orb,
+        .card,
+        .cta::after {
+          animation: none !important;
+          transition: none !important;
+        }
+
+        .card:hover,
+        .card:focus-visible {
+          transform: none;
+        }
+      }
     </style>
   </head>
   <body>
-    <main>
-      <h1>Hot Stuff — Mini Projects</h1>
-      <p>Welcome. This is a simple landing page linking to small, self‑contained projects I’m putting online.</p>
-      <ul>
-        <li><a href="political-predictions/">Political predictions (2025–2029)</a></li>
-        <li><a href="urban-72h-prep/">72-hour urban outage prep</a></li>
-        <li><a href="brimstone-index/">Brimstone Index experiment</a></li>
-      </ul>
+    <main class="page">
+      <section class="hero">
+        <span class="badge">Fresh from the lab</span>
+        <h1>Hot Stuff — Mini Experiments</h1>
+        <p class="tagline">Sharp, slightly chaotic prototypes and trackers, brewed whenever inspiration collides with spare midnight hours.</p>
+        <div class="hero-notes">Built with curiosity, caffeine, and the occasional questionable dataset.</div>
+        <span class="orb" aria-hidden="true"></span>
+      </section>
+
+      <section class="projects">
+        <h2 class="section-title">Live Projects</h2>
+        <div class="projects-grid">
+          <a class="card" href="political-predictions/">
+            <span class="emoji" aria-hidden="true">🗳️</span>
+            <div class="card-body">
+              <h3>Political predictions</h3>
+              <p>Keeping score on bold 2025–2029 political forecasts with receipts when things land.</p>
+              <span class="cta">Open project</span>
+            </div>
+          </a>
+          <a class="card" href="urban-72h-prep/">
+            <span class="emoji" aria-hidden="true">🔦</span>
+            <div class="card-body">
+              <h3>72-hour urban outage prep</h3>
+              <p>A practical checklist for riding out three chaotic days without power or water in the city.</p>
+              <span class="cta">Open project</span>
+            </div>
+          </a>
+          <a class="card" href="brimstone-index/">
+            <span class="emoji" aria-hidden="true">🔥</span>
+            <div class="card-body">
+              <h3>Brimstone Index experiment</h3>
+              <p>High-octane anti-ESG portfolio tracker pitting vices against the S&amp;P in real time.</p>
+              <span class="cta">Open project</span>
+            </div>
+          </a>
+        </div>
+      </section>
     </main>
   </body>
 </html>
