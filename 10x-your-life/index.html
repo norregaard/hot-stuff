@@ -1,0 +1,126 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>10X Your Life — Book</title>
+    <meta name="description" content="A tongue-in-cheek fitness + finance field manual blending bro-science, brutal truths, and memes." />
+    <link rel="apple-touch-icon" sizes="180x180" href="/assets/favicons/apple-touch-icon.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicons/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/assets/favicons/favicon-16x16.png" />
+    <link rel="manifest" href="/assets/favicons/site.webmanifest" />
+    <link rel="shortcut icon" href="/assets/favicons/favicon.ico" />
+    <style>
+      :root {
+        color-scheme: light dark;
+        --bg: #060410;
+        --fg: #f7f8ff;
+        --muted: rgba(247, 248, 255, 0.75);
+        --card: rgba(16, 14, 34, 0.85);
+        --border: rgba(255, 255, 255, 0.12);
+        --shadow: rgba(9, 6, 24, 0.35);
+        --accent: #ffb347;
+      }
+
+      @media (prefers-color-scheme: light) {
+        :root {
+          --bg: #f3f5ff;
+          --fg: #15131f;
+          --muted: rgba(21, 19, 31, 0.7);
+          --card: rgba(255, 255, 255, 0.95);
+          --border: rgba(21, 19, 31, 0.08);
+          --shadow: rgba(31, 28, 62, 0.12);
+        }
+      }
+
+      * { box-sizing:border-box }
+      body {
+        margin:0;
+        font-family:"Inter", "Segoe UI", system-ui, -apple-system, sans-serif;
+        line-height:1.6;
+        background:var(--bg);
+        color:var(--fg);
+        min-height:100vh;
+        position:relative;
+      }
+
+      body::before {
+        content:"";
+        position:fixed; inset:0;
+        background:
+          radial-gradient(110% 110% at 90% -10%, rgba(255,111,97,0.24), transparent 70%),
+          radial-gradient(120% 120% at 0% 10%, rgba(122,92,255,0.28), transparent 70%),
+          radial-gradient(140% 140% at 50% 110%, rgba(0,181,173,0.18), transparent 70%);
+        z-index:-2;
+      }
+
+      body::after {
+        content:"";
+        position:fixed; inset:0;
+        background: linear-gradient(180deg, rgba(4,3,9,0.55) 0%, transparent 35%),
+                    linear-gradient(0deg, rgba(4,3,9,0.35) 0%, transparent 50%);
+        z-index:-1;
+        pointer-events:none;
+      }
+
+      .wrap { position:relative; max-width: 900px; margin:0 auto; padding:2.2rem 1.2rem 3rem; }
+      .back { text-decoration:none; display:inline-flex; align-items:center; gap:.4rem; padding:.45rem .8rem; border-radius:999px; border:1px solid rgba(255,255,255,0.35); color:var(--fg); background:rgba(255,255,255,0.08); box-shadow:0 12px 24px rgba(9,6,24,0.35); }
+      .back:hover { background:rgba(255,255,255,0.18); }
+      header {
+        display:flex; flex-direction:column; gap:1rem; align-items:center; text-align:center;
+        background:var(--card); border:1px solid var(--border); border-radius:20px; padding:2rem 1.5rem; box-shadow:0 22px 60px var(--shadow);
+      }
+      header h1 { margin:0; font-size: clamp(1.8rem,4vw,2.6rem); }
+      header p { margin:0; max-width:60ch; color:var(--muted); }
+      .hero-grid { margin-top:2rem; display:grid; gap:1.4rem; grid-template-columns:repeat(auto-fit,minmax(240px,1fr)); }
+      .card { background:var(--card); border:1px solid var(--border); border-radius:20px; padding:1.3rem 1.5rem; box-shadow:0 16px 44px var(--shadow); }
+      figure { margin:0; }
+      figure img { width:100%; border-radius:18px; box-shadow:0 18px 40px rgba(0,0,0,0.45); }
+      figure figcaption { font-size:.9rem; color:var(--muted); margin-top:.6rem; text-align:center; }
+      .card h2 { margin:0 0 .35rem; font-size:1.2rem; }
+      .card ul { margin:.6rem 0 0; padding-left:1.1rem; }
+      .card ul li { margin-bottom:.4rem; }
+      .links { display:flex; flex-wrap:wrap; gap:.7rem; margin-top:1rem; }
+      .links a { text-decoration:none; border:1px solid rgba(255,179,71,0.7); border-radius:999px; padding:.35rem .95rem; font-weight:600; color:var(--accent); background:rgba(255,179,71,0.12); transition:transform .2s ease, background .2s ease, color .2s ease; }
+      .links a:hover { background:rgba(255,179,71,0.22); color:#ffcf87; transform:translateY(-1px); }
+      @media (max-width:600px){
+        .hero-grid { grid-template-columns:1fr; }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="wrap">
+      <a class="back" href="../index.html" aria-label="Back to projects"><span>←</span><span>Back</span></a>
+      <header>
+        <h1>10X Your Life — The Ultimate Masterclass</h1>
+        <p>This project was an experiment I was trying out in July 2025: could I co-write a book with AI, then publish it end-to-end through Amazon’s KDP? Turns out yes—now it lives on Kindle, paperback, and hardcover.</p>
+      </header>
+
+      <div class="hero-grid">
+        <figure>
+          <img src="images/cover-image_w_author_v2.jpg" alt="Cover of 10X Your Life showing a Roman-styled lifter under a Bitcoin halo" loading="lazy" />
+          <figcaption>Front cover illustration — dominate the day, crush the gym, outperform the market.</figcaption>
+        </figure>
+        <div class="card">
+          <h2>Inside the book</h2>
+          <p><strong>10X YOUR LIFE: ULTIMATE MASTERCLASS</strong><br />From Alarm Clock to Alpha — A Self-Help Guide for the Unhinged</p>
+          <p><strong>Description:</strong></p>
+          <p>What if the secret to success isn’t balance, but chaos? What if you’ve been lied to about discipline, comfort, and “self-care”? This is not your average self-help book. This is a full-throttle, no-snooze-button manifesto for anyone bold (or delusional) enough to chase greatness like it owes them money.</p>
+          <p><strong>Inside, you’ll learn:</strong></p>
+          <ul>
+            <li>Why real high performers wake up at 3:59 AM and treat cold showers like spiritual baptisms.</li>
+            <li>How to turn margin call trauma into muscle and mindset gainz.</li>
+            <li>Why tears are the new pre-workout (drink them, bro).</li>
+            <li>How to invest in NFTs before breakfast and read 12 books by dinner (or fake it with confidence).</li>
+            <li>Stoic philosophy, gym wisdom, and meme energy — fused into one outrageous life plan.</li>
+          </ul>
+          <p>Packed with bro-science, brutal truths, and dangerous levels of alpha, this masterclass is half warrior’s creed, half satire — and 100% guaranteed to kick you directly into your next evolution. Whether you’re looking to level up your routine, dominate your inner beta, or just flex on mediocrity, this book will slap you in the face with motivation and call it a warm-up.</p>
+          <div class="links">
+            <a href="https://amzn.eu/d/2YIGaU2" target="_blank" rel="noopener">View on Amazon</a>
+            <a href="https://www.goodreads.com/book/show/238836141-10x-your-life" target="_blank" rel="noopener">See on Goodreads</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
