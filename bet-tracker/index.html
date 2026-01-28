@@ -1,0 +1,523 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Bet Tracker Galore</title>
+  <style>
+    :root {
+      --bg-1: #0d1b2a;
+      --bg-2: #1b263b;
+      --bg-3: #f5f0e6;
+      --card: #ffffff;
+      --ink: #132024;
+      --muted: #5b6b70;
+      --accent: #ffb703;
+      --accent-2: #219ebc;
+      --danger: #ef476f;
+      --success: #2a9d8f;
+      --shadow: rgba(5, 17, 22, 0.15);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: "Bodoni MT", "Didot", "Garamond", serif;
+      color: var(--ink);
+      background: radial-gradient(circle at 15% 20%, rgba(255, 184, 3, 0.15), transparent 50%),
+        radial-gradient(circle at 85% 10%, rgba(33, 158, 188, 0.2), transparent 55%),
+        linear-gradient(160deg, var(--bg-1), var(--bg-2) 55%, var(--bg-3) 140%);
+      min-height: 100vh;
+    }
+
+    .page {
+      max-width: 980px;
+      margin: 0 auto;
+      padding: 48px 20px 80px;
+    }
+
+    header {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      color: #fefbf4;
+    }
+
+    .eyebrow {
+      text-transform: uppercase;
+      letter-spacing: 0.3em;
+      font-size: 12px;
+      font-family: "Trebuchet MS", "Gill Sans", sans-serif;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: clamp(2.4rem, 4vw, 3.4rem);
+    }
+
+    .subtitle {
+      font-family: "Trebuchet MS", "Gill Sans", sans-serif;
+      max-width: 620px;
+      line-height: 1.6;
+      color: #d6e2e9;
+    }
+
+    .bets {
+      margin-top: 36px;
+      display: grid;
+      gap: 24px;
+    }
+
+    .bet-card {
+      background: var(--card);
+      border-radius: 20px;
+      padding: 28px;
+      box-shadow: 0 20px 40px var(--shadow);
+      border: 2px solid rgba(255, 183, 3, 0.25);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .bet-card::after {
+      content: "";
+      position: absolute;
+      inset: auto 0 0 0;
+      height: 8px;
+      background: linear-gradient(90deg, var(--accent), var(--accent-2));
+      opacity: 0.5;
+    }
+
+    .bet-header {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .bet-title {
+      font-size: 1.6rem;
+      margin: 0;
+    }
+
+    .amount {
+      padding: 6px 14px;
+      background: rgba(33, 158, 188, 0.12);
+      border-radius: 999px;
+      font-family: "Trebuchet MS", "Gill Sans", sans-serif;
+      font-weight: 600;
+    }
+
+    .meta {
+      margin: 18px 0 0;
+      display: grid;
+      gap: 12px;
+      font-family: "Trebuchet MS", "Gill Sans", sans-serif;
+      line-height: 1.5;
+    }
+
+    .meta strong {
+      color: var(--ink);
+    }
+
+    .status {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-family: "Trebuchet MS", "Gill Sans", sans-serif;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      font-size: 12px;
+      padding: 8px 14px;
+      border-radius: 999px;
+    }
+
+    .status-none {
+      background: #eff3f6;
+      color: #5b6b70;
+    }
+
+    .status-partial {
+      background: #fff3c4;
+      color: #7a5b00;
+    }
+
+    .status-complete {
+      background: #d9f5ef;
+      color: #1c6c5f;
+    }
+
+    .signers {
+      margin-top: 18px;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 16px;
+    }
+
+    .signer {
+      border: 1px solid rgba(19, 32, 36, 0.1);
+      border-radius: 16px;
+      padding: 16px;
+      display: grid;
+      gap: 8px;
+      background: #fbfbfd;
+    }
+
+    .signer-name {
+      font-weight: 700;
+      font-size: 1.1rem;
+    }
+
+    .signer-status {
+      font-family: "Trebuchet MS", "Gill Sans", sans-serif;
+      font-size: 0.9rem;
+      color: var(--muted);
+    }
+
+    button {
+      border: none;
+      cursor: pointer;
+      font-family: "Trebuchet MS", "Gill Sans", sans-serif;
+      font-weight: 700;
+      border-radius: 10px;
+      padding: 10px 14px;
+      background: linear-gradient(120deg, var(--accent), #ff8800);
+      color: #2c1f00;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 18px rgba(255, 183, 3, 0.3);
+    }
+
+    button:disabled {
+      background: #e2e8f0;
+      color: #94a3b8;
+      cursor: not-allowed;
+      box-shadow: none;
+      transform: none;
+    }
+
+    .note {
+      font-family: "Trebuchet MS", "Gill Sans", sans-serif;
+      font-size: 0.85rem;
+      color: #51646b;
+    }
+
+    .modal {
+      position: fixed;
+      inset: 0;
+      background: rgba(8, 16, 26, 0.7);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      z-index: 10;
+    }
+
+    .modal.active {
+      display: flex;
+    }
+
+    .modal-card {
+      background: #fff;
+      padding: 24px;
+      border-radius: 18px;
+      max-width: 420px;
+      width: 100%;
+      display: grid;
+      gap: 12px;
+    }
+
+    .modal-card input {
+      padding: 10px 12px;
+      font-size: 1rem;
+      border-radius: 10px;
+      border: 1px solid #cbd5e1;
+    }
+
+    .modal-actions {
+      display: flex;
+      gap: 10px;
+      justify-content: flex-end;
+    }
+
+    .alert {
+      padding: 10px 12px;
+      border-radius: 10px;
+      font-family: "Trebuchet MS", "Gill Sans", sans-serif;
+      font-size: 0.9rem;
+    }
+
+    .alert.error {
+      background: #ffe0e5;
+      color: #8a2f44;
+    }
+
+    .alert.success {
+      background: #e4f6f0;
+      color: #1e5b50;
+    }
+
+    @media (max-width: 600px) {
+      .page {
+        padding: 36px 16px 64px;
+      }
+
+      h1 {
+        font-size: 2.2rem;
+      }
+
+      .subtitle {
+        font-size: 0.98rem;
+      }
+
+      .bet-header {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .bet-card {
+        padding: 22px;
+      }
+
+      .meta {
+        font-size: 0.95rem;
+      }
+
+      .signers {
+        grid-template-columns: 1fr;
+      }
+
+      .modal-actions {
+        flex-direction: column;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <header>
+      <div class="eyebrow">Private Bets</div>
+      <h1>Bet Tracker Galore</h1>
+      <p class="subtitle">
+        Track your wagers, lock in signatures, and keep the stakes visible. Status colors update as signatures land.
+      </p>
+    </header>
+
+    <section class="bets" id="bets"></section>
+  </div>
+
+  <div class="modal" id="sign-modal" aria-hidden="true">
+    <div class="modal-card">
+      <h2 id="modal-title">Sign Bet</h2>
+      <p class="note">Enter the shared signing code to record your signature.</p>
+      <input type="password" id="sign-code" placeholder="Shared code" autocomplete="off" />
+      <div id="modal-alert"></div>
+      <div class="modal-actions">
+        <button type="button" id="cancel-sign">Cancel</button>
+        <button type="button" id="confirm-sign">Sign Now</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const STORAGE_KEY = "bet-tracker-state-v1";
+    const SHARED_HASH = "97c6474c7f0a497323c88425dd769ce2475108568167b18ab51a505697d43c2d";
+
+    const defaultState = {
+      bets: [
+        {
+          id: "bet-001",
+          title: "Ilhan Omar fraud conviction",
+          amount: "$100",
+          terms:
+            "Within 12 months of the date both parties sign this bet, Ilhan Omar receives either a civil or criminal conviction for fraud in a court of law.",
+          clarification:
+            "Conviction means a final judgment entered by a court; pending charges or investigations do not count.",
+          background:
+            "This bet is based on public reporting and scrutiny of alleged fraud activity in Minnesota, as well as questions raised about changes in personal net worth since 2019, when her and her husband had relatively modest means to begin with. No specific wrongdoing is asserted here; the bet outcome depends solely on a court conviction for fraud.",
+          activatedAt: null,
+          signers: [
+            { name: "Jakob", signedAt: null },
+            { name: "Pavel", signedAt: null }
+          ]
+        }
+      ]
+    };
+
+    const state = loadState();
+    const betsRoot = document.getElementById("bets");
+    const modal = document.getElementById("sign-modal");
+    const modalTitle = document.getElementById("modal-title");
+    const modalAlert = document.getElementById("modal-alert");
+    const signCodeInput = document.getElementById("sign-code");
+    const cancelSign = document.getElementById("cancel-sign");
+    const confirmSign = document.getElementById("confirm-sign");
+
+    let pendingSigner = null;
+    let pendingBetId = null;
+
+    render();
+
+    function loadState() {
+      const saved = localStorage.getItem(STORAGE_KEY);
+      if (!saved) {
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(defaultState));
+        return structuredClone(defaultState);
+      }
+      try {
+        return JSON.parse(saved);
+      } catch (error) {
+        return structuredClone(defaultState);
+      }
+    }
+
+    function saveState() {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+    }
+
+    function render() {
+      betsRoot.innerHTML = "";
+      state.bets.forEach((bet) => {
+        const signedCount = bet.signers.filter((signer) => signer.signedAt).length;
+        const statusClass = signedCount === 0 ? "status-none" : signedCount === 1 ? "status-partial" : "status-complete";
+        const statusText = signedCount === 0 ? "No signatures" : signedCount === 1 ? "One signed" : "Fully signed";
+        const card = document.createElement("article");
+        card.className = "bet-card";
+        card.innerHTML = `
+          <div class="bet-header">
+            <h2 class="bet-title">${bet.title}</h2>
+            <span class="amount">Stake: ${bet.amount}</span>
+          </div>
+          <div class="meta">
+            <div><strong>Status:</strong> <span class="status ${statusClass}">${statusText}</span></div>
+            <div><strong>Activation date:</strong> ${bet.activatedAt ? formatDate(bet.activatedAt) : "Pending both signatures"}</div>
+            <div><strong>Days left:</strong> ${bet.activatedAt ? formatDaysLeft(bet.activatedAt) : "Starts when fully signed"}</div>
+            <div><strong>Terms:</strong> ${bet.terms}</div>
+            <div><strong>Clarification:</strong> ${bet.clarification}</div>
+            <div><strong>Background:</strong> ${bet.background}</div>
+          </div>
+          <div class="signers">
+            ${bet.signers
+              .map((signer) => {
+                const signedLabel = signer.signedAt ? `Signed on ${formatDate(signer.signedAt)}` : "Not signed";
+                return `
+                  <div class="signer">
+                    <div class="signer-name">${signer.name}</div>
+                    <div class="signer-status">${signedLabel}</div>
+                    <button type="button" data-bet="${bet.id}" data-signer="${signer.name}" ${signer.signedAt ? "disabled" : ""}>
+                      ${signer.signedAt ? "Signed" : "Sign bet"}
+                    </button>
+                  </div>
+                `;
+              })
+              .join("")}
+          </div>
+          <p class="note">Use the shared signing code to confirm your signature.</p>
+        `;
+        betsRoot.appendChild(card);
+      });
+
+      document.querySelectorAll("button[data-bet]").forEach((button) => {
+        button.addEventListener("click", () => openModal(button.dataset.bet, button.dataset.signer));
+      });
+    }
+
+    function openModal(betId, signerName) {
+      pendingSigner = signerName;
+      pendingBetId = betId;
+      modalTitle.textContent = `Sign as ${signerName}`;
+      signCodeInput.value = "";
+      modalAlert.innerHTML = "";
+      modal.classList.add("active");
+      modal.setAttribute("aria-hidden", "false");
+      signCodeInput.focus();
+    }
+
+    function closeModal() {
+      modal.classList.remove("active");
+      modal.setAttribute("aria-hidden", "true");
+      pendingSigner = null;
+      pendingBetId = null;
+    }
+
+    cancelSign.addEventListener("click", closeModal);
+    modal.addEventListener("click", (event) => {
+      if (event.target === modal) closeModal();
+    });
+
+    confirmSign.addEventListener("click", async () => {
+      const code = signCodeInput.value.trim();
+      if (!code) {
+        showAlert("Please enter the shared code.", "error");
+        return;
+      }
+      const hash = await sha256(code);
+      if (hash !== SHARED_HASH) {
+        showAlert("That code did not match. Try again.", "error");
+        return;
+      }
+      const bet = state.bets.find((item) => item.id === pendingBetId);
+      if (!bet) {
+        showAlert("Could not find that bet.", "error");
+        return;
+      }
+      const signer = bet.signers.find((item) => item.name === pendingSigner);
+      if (!signer) {
+        showAlert("Could not find that signer.", "error");
+        return;
+      }
+      signer.signedAt = new Date().toISOString();
+      if (bet.signers.every((item) => item.signedAt) && !bet.activatedAt) {
+        bet.activatedAt = new Date().toISOString();
+      }
+      saveState();
+      showAlert("Signature recorded.", "success");
+      setTimeout(() => {
+        closeModal();
+        render();
+      }, 600);
+    });
+
+    function showAlert(message, type) {
+      modalAlert.innerHTML = `<div class="alert ${type}">${message}</div>`;
+    }
+
+    function formatDate(iso) {
+      const date = new Date(iso);
+      return date.toLocaleDateString(undefined, {
+        year: "numeric",
+        month: "short",
+        day: "numeric"
+      });
+    }
+
+    function formatDaysLeft(activatedAt) {
+      const start = new Date(activatedAt);
+      const end = new Date(start);
+      end.setDate(end.getDate() + 365);
+      const diffMs = end - new Date();
+      const daysLeft = Math.ceil(diffMs / (1000 * 60 * 60 * 24));
+      if (daysLeft < 0) return "Expired";
+      if (daysLeft === 0) return "0 days";
+      return `${daysLeft} days`;
+    }
+
+    async function sha256(message) {
+      const data = new TextEncoder().encode(message);
+      const hashBuffer = await crypto.subtle.digest("SHA-256", data);
+      return Array.from(new Uint8Array(hashBuffer))
+        .map((byte) => byte.toString(16).padStart(2, "0"))
+        .join("");
+    }
+
+    setInterval(render, 1000 * 60 * 60);
+  </script>
+</body>
+</html>
