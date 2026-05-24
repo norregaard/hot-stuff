@@ -397,6 +397,7 @@
           </div>
           <div class="meta">
             <div><strong>Status:</strong> <span class="status ${statusClass}">${statusText}</span></div>
+            <div><em>This page was mostly for fun, and this particular bet was not actually agreed on. Also the signing logic is not properly implemented, only works locally.</em></div>
             <div><strong>Activation date:</strong> ${bet.activatedAt ? formatDate(bet.activatedAt) : "Pending both signatures"}</div>
             <div><strong>Days left:</strong> ${bet.activatedAt ? formatDaysLeft(bet.activatedAt) : "Starts when fully signed"}</div>
             <div><strong>Terms:</strong> ${bet.terms}</div>
