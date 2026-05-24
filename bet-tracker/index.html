@@ -39,6 +39,22 @@
       padding: 48px 20px 80px;
     }
 
+    .back-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.45rem;
+      margin-bottom: 20px;
+      font-family: "Trebuchet MS", "Gill Sans", sans-serif;
+      font-size: 0.95rem;
+      font-weight: 700;
+      text-decoration: none;
+      color: #fefbf4;
+    }
+
+    .back-link::before {
+      content: "←";
+    }
+
     header {
       display: flex;
       flex-direction: column;
@@ -302,6 +318,7 @@
 </head>
 <body>
   <div class="page">
+    <a class="back-link" href="../">Back to Projects</a>
     <header>
       <div class="eyebrow">Private Bets</div>
       <h1>Bet Tracker Galore</h1>

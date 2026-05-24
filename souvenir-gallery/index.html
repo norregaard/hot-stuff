@@ -1,0 +1,267 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Souvenir Gallery & World Map</title>
+  <style>
+    :root {
+      --bg: #f6f1e8;
+      --card: #fffdf9;
+      --ink: #1f2933;
+      --muted: #52606d;
+      --accent: #c26d3a;
+      --border: #e7d8c7;
+      --shadow: rgba(31, 41, 51, 0.12);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: Georgia, "Times New Roman", serif;
+      color: var(--ink);
+      background:
+        radial-gradient(circle at top left, rgba(194, 109, 58, 0.14), transparent 30%),
+        linear-gradient(180deg, #f9f4ec 0%, var(--bg) 100%);
+    }
+
+    body.lightbox-open {
+      overflow: hidden;
+    }
+
+    main {
+      max-width: 980px;
+      margin: 0 auto;
+      padding: 56px 20px 72px;
+    }
+
+    .back-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.45rem;
+      margin-bottom: 24px;
+      font-size: 0.95rem;
+      font-weight: 600;
+      text-decoration: none;
+      color: var(--accent);
+    }
+
+    .back-link::before {
+      content: "←";
+    }
+
+    h1 {
+      margin: 0 0 16px;
+      font-size: clamp(2.2rem, 5vw, 3.5rem);
+      line-height: 1.05;
+    }
+
+    p {
+      max-width: 700px;
+      margin: 0 0 32px;
+      font-size: 1.05rem;
+      line-height: 1.7;
+      color: var(--muted);
+    }
+
+    a {
+      color: var(--accent);
+    }
+
+    .gallery {
+      display: grid;
+      gap: 24px;
+    }
+
+    .gallery a {
+      display: block;
+      text-decoration: none;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+      border-radius: 18px;
+    }
+
+    .gallery a:hover {
+      transform: translateY(-2px);
+    }
+
+    .gallery a:focus-visible {
+      outline: 3px solid rgba(194, 109, 58, 0.35);
+      outline-offset: 4px;
+    }
+
+    .gallery img {
+      display: block;
+      width: 100%;
+      height: auto;
+      border-radius: 18px;
+      border: 1px solid var(--border);
+      background: var(--card);
+      box-shadow: 0 18px 40px var(--shadow);
+    }
+
+    .lightbox {
+      position: fixed;
+      inset: 0;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+      background: rgba(19, 24, 27, 0.88);
+      z-index: 20;
+    }
+
+    .lightbox.is-open {
+      display: flex;
+    }
+
+    .lightbox-dialog {
+      position: relative;
+      width: min(100%, 1100px);
+      display: flex;
+      justify-content: center;
+    }
+
+    .lightbox-image {
+      display: block;
+      max-width: 100%;
+      max-height: 84vh;
+      width: auto;
+      height: auto;
+      border-radius: 18px;
+      box-shadow: 0 24px 60px rgba(0, 0, 0, 0.35);
+      background: var(--card);
+    }
+
+    .lightbox-close {
+      position: absolute;
+      top: -14px;
+      right: -14px;
+      width: 44px;
+      height: 44px;
+      border: 0;
+      border-radius: 999px;
+      background: #fff;
+      color: var(--ink);
+      font-size: 1.6rem;
+      line-height: 1;
+      cursor: pointer;
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.22);
+    }
+
+    .lightbox-close:hover {
+      transform: scale(1.04);
+    }
+
+    .lightbox-close:focus-visible {
+      outline: 3px solid rgba(194, 109, 58, 0.45);
+      outline-offset: 3px;
+    }
+
+    @media (max-width: 640px) {
+      main {
+        padding: 36px 16px 56px;
+      }
+
+      p {
+        margin-bottom: 24px;
+        font-size: 1rem;
+      }
+
+      .gallery {
+        gap: 18px;
+      }
+
+      .lightbox {
+        padding: 16px;
+      }
+
+      .lightbox-dialog {
+        width: 100%;
+      }
+
+      .lightbox-close {
+        top: -10px;
+        right: -2px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <a class="back-link" href="../">Back to Projects</a>
+    <h1>Souvenir Gallery &amp; World Map</h1>
+    <p>
+      This is a project I use to keep track of where I've travelled and the pictures of the souvenirs I have for each trip.
+    </p>
+    <p>
+      This site is protected with a login. Live link:
+      <a href="https://souvenir.vi-tips.com">https://souvenir.vi-tips.com</a>
+    </p>
+
+    <section class="gallery" aria-label="Souvenir gallery screenshots">
+      <a href="images/souvenir-screenshot.jpg" data-lightbox-image>
+        <img src="images/souvenir-screenshot.jpg" alt="Souvenir Gallery screenshot" />
+      </a>
+      <a href="images/souvenir-map-screenshot.jpg" data-lightbox-image>
+        <img src="images/souvenir-map-screenshot.jpg" alt="World map screenshot from the Souvenir Gallery project" />
+      </a>
+    </section>
+  </main>
+
+  <div class="lightbox" id="lightbox" aria-hidden="true">
+    <div class="lightbox-dialog" role="dialog" aria-modal="true" aria-label="Expanded screenshot">
+      <button class="lightbox-close" type="button" id="lightbox-close" aria-label="Close image viewer">&times;</button>
+      <img class="lightbox-image" id="lightbox-image" alt="" />
+    </div>
+  </div>
+
+  <script>
+    const lightbox = document.getElementById("lightbox");
+    const lightboxImage = document.getElementById("lightbox-image");
+    const lightboxClose = document.getElementById("lightbox-close");
+    const imageLinks = document.querySelectorAll("[data-lightbox-image]");
+
+    function openLightbox(link) {
+      const image = link.querySelector("img");
+      lightboxImage.src = link.href;
+      lightboxImage.alt = image ? image.alt : "";
+      lightbox.classList.add("is-open");
+      lightbox.setAttribute("aria-hidden", "false");
+      document.body.classList.add("lightbox-open");
+      lightboxClose.focus();
+    }
+
+    function closeLightbox() {
+      lightbox.classList.remove("is-open");
+      lightbox.setAttribute("aria-hidden", "true");
+      lightboxImage.src = "";
+      lightboxImage.alt = "";
+      document.body.classList.remove("lightbox-open");
+    }
+
+    imageLinks.forEach((link) => {
+      link.addEventListener("click", (event) => {
+        event.preventDefault();
+        openLightbox(link);
+      });
+    });
+
+    lightboxClose.addEventListener("click", closeLightbox);
+
+    lightbox.addEventListener("click", (event) => {
+      if (event.target === lightbox) {
+        closeLightbox();
+      }
+    });
+
+    document.addEventListener("keydown", (event) => {
+      if (event.key === "Escape" && lightbox.classList.contains("is-open")) {
+        closeLightbox();
+      }
+    });
+  </script>
+</body>
+</html>
